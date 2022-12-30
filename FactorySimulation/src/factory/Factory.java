@@ -20,7 +20,7 @@ public class Factory {
 			for(Unit u  : l.getUnits()) {
 				for(Machine m : u.getMachines()) {
 					if(m.getWorkingOn() >0) {
-						System.out.println("Factory leer");
+						System.out.println("Factory not empty");
 						return false;
 					}
 				}

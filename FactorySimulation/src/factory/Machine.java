@@ -14,7 +14,7 @@ public class Machine {
 	private float[] idlePowers;
 	private float[] maxPowers;
 	private int pIndex;
-	private int parallelToId;
+	
 	
 	
 	//status0 = ready; status 1 besetzt , status 2= arbeiten , rest errors
@@ -33,14 +33,11 @@ public class Machine {
 	
 	public Machine(int id) {
 		this.id =id;
-		parallelToId =-1;
+		
 	}
 	
 
-	public Machine(int id , int para) {
-		this.id =id;
-		this.parallelToId = para;
-	}
+
 	
 	
 	public void update() {
@@ -101,9 +98,6 @@ public class Machine {
 	}
 	
 	
-	private void updateErrorTime() {
-		errorTime--;
-	}
 
 
 	public int getId() {
@@ -116,14 +110,7 @@ public class Machine {
 	}
 
 
-	public int getParallelToId() {
-		return parallelToId;
-	}
 
-
-	public void setParallelToId(int parallelToId) {
-		this.parallelToId = parallelToId;
-	}
 
 
 	public int getStatus() {
@@ -203,7 +190,7 @@ public class Machine {
 
 	public void setIdlePower(float min , float max) {
 		Random r = new Random();
-		idlePowers =new float[5];
+		idlePowers =new float[15];
 		for(int i =0; i<idlePowers.length;i++) {
 			idlePowers[i] = r.nextFloat(min,max+1f);
 		}
@@ -212,7 +199,7 @@ public class Machine {
 
 	public void setMaxPower(float min,float max) {
 			Random r = new Random();
-			maxPowers =new float[5];
+			maxPowers =new float[15];
 			for(int i =0; i<maxPowers.length;i++) {
 				maxPowers[i] = r.nextFloat(min,max+1f);
 			}
@@ -239,14 +226,6 @@ public class Machine {
 		
 	}
 
-
-
-	
-	
-	
-	
-	
-	
 	
 
 }
