@@ -20,8 +20,6 @@ public class MachineBrokerController
     this.machineStateService=machineStateService;
     }
 
-    // empfängt zustand einer maschine
-    //reihenfolge ist imt put request egal
     //http://localhost:8080/sendmachine/1?s=2&p=85.43&w=13&t=240001.444
    // @PutMapping(path ="{id}")
     public void receiveData(@PathVariable int id,
@@ -40,9 +38,9 @@ public class MachineBrokerController
 
     @PutMapping
     public void receiveStates(@RequestBody List<MachineState> machineStateList){
-        System.out.println("daten wurden empfangen");
+        System.out.println("received machinedata, machines: " +machineStateList.size());
 
-        System.out.println(machineStateList);
+        System.out.println(machineStateList.toString());
         //machineStateService.addMachineStates(machineStateList);
 
     }
