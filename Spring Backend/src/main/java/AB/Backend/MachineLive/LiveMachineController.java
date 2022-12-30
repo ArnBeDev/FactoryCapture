@@ -43,11 +43,6 @@ public class LiveMachineController {
 
 
     }
-    @GetMapping(path="/api/live")
-    public String allData(){
-        System.out.println("ALLL");
-        return "Hallo";
-    }
 
 
 }

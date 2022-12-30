@@ -27,14 +27,6 @@ public class MachineController {
 
 
 
-   //@GetMapping
-    public List<MachineState> getHallo( String id){
-       int in = Integer.parseInt(id);
-
-       return List.of(new MachineState(in,222l,10000f, (byte) 3,55));
-
-    }
-
 @GetMapping
     public Machine getMachine(@RequestParam(required = false) String id){
 
@@ -43,11 +35,10 @@ public class MachineController {
             return new Machine(31);
         }
 
-        System.out.println("Anfrage" +id);
+        System.out.println("Request for: " +id);
 
         int i = Integer.parseInt(id);
-       // ms.addMachineState(i,2l,3f,(byte)4,5);
-       // int toIn= Integer.parseInt(id);
+
         return (new Machine(3));
     }
     @GetMapping("/ask/{id}")

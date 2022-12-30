@@ -30,13 +30,13 @@ public class MachineState implements Comparable<MachineState> {
 
 
 
-    public MachineState(int machineId,long timestamp,float power,byte stateCode,int workingOn){
+    public MachineState(int id,byte s,float p,int w,long t){
 
-        this.machineId =machineId;
-        this.timestamp = timestamp;
-        this.power = power;
-        this.stateCode=stateCode;
-        this.workingOn = workingOn;
+        this.machineId =id;
+        this.timestamp = t;
+        this.power = p;
+        this.stateCode=s;
+        this.workingOn = w;
     }
     public MachineState(int id,int machineId,long timestamp,float power,byte stateCode,int workingOn){
         this.id = id;
