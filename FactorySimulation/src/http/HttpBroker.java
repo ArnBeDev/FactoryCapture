@@ -1,5 +1,9 @@
 package http;
 
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import factory.Factory;
 import factory.FactoryLine;
 import factory.Machine;
@@ -9,7 +13,7 @@ public class HttpBroker {
 	
 	
 	private String data ;
-	private String PostBody;;
+	private String PostBody;
 	
 	public void sendFactory(Factory factory, long timeStamp) {
 		data ="";
@@ -32,12 +36,12 @@ public class HttpBroker {
 	
 	private void addBody(int id, int s, float p , int w, long t) {
 		if(data.equals("")) {
-			String st="{id: "+ id+", " +"s: " + s +", " + "p: " +p +", " +"w: " +w+ ", " +"t: " +t +"}";
+			String st="{\"machineId\": "+ id+", " +"\"stateCode\": " + s +", " + "\"power\": " +p +", " +"\"workingOn\": " +w+ ", " +"\"timestamp\": " +t +"}";
 			
 			data +=st;
 		//	System.out.println(data);
 		}else {
-			data +=(" ,{"+ "id: "+ id+", " +"s: " + s +", " + "p: " +p +", " +"w: " +w+ ", " +"t: " +t+"}" ); 
+			data +=(" ,{"+ "\"machineId\": "+ id+", " +"\"stateCode\": " + s +", " + "\"power\": " +p +", " +"\"workingOn\": " +w+ ", " +"\"timestamp\": " +t+"}" ); 
 		}
 		
 		
@@ -48,7 +52,34 @@ public class HttpBroker {
 		
 		
 		PostBody = "[ " +data +"]";
+		
+		
+		
 		System.out.println( PostBody);
+		
+		try {
+		
+			URL url = new URL("http://192.168.2.102:8080/sendmachine/");
+			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+			httpCon.setRequestProperty("Accept-Encoding", "application/json");
+			httpCon.setRequestProperty("Content-Type", "application/json");
+			 httpCon.setDoInput(true);
+			httpCon.setDoOutput(true);
+			httpCon.setRequestMethod("PUT");
+			OutputStreamWriter out = new OutputStreamWriter(
+			    httpCon.getOutputStream());
+			out.write(PostBody);
+			out.flush();
+			
+		
+			httpCon.getInputStream();
+			
+		}catch(Exception e) {
+			System.out.println("SENDING FAILED");
+		}
+	
+		
+		
 		data ="";
 		PostBody ="";
 	}

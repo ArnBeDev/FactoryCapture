@@ -190,11 +190,14 @@ public class FactorySimulation {
 		m14.setIdlePower(2, 4);
 		u10.setMachines(List.of(m13,m14));
 		
+		
 		Machine m15 = new Machine(15);
 		m15.setWorkDuration(5,35);
 		m15.setMaxPower(100, 300);
 		m15.setIdlePower(3, 15);
-		u10.setMachines(List.of(m15));
+		
+		Unit u10b = new Unit();
+		u10b.setMachines(List.of(m15));
 		
 		
 		
@@ -207,11 +210,12 @@ public class FactorySimulation {
 		u7.setNextUnit(u8);
 		u8.setNextUnit(u9);
 		u9.setNextUnit(u10);
-		u10.setLastUnit(true);
+		u10.setNextUnit(u10b);
+		u10b.setLastUnit(true);
 		
 		
 		
-		fLine1.setUnits(List.of(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10));
+		fLine1.setUnits(List.of(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u10b));
 		
 		
 		
@@ -378,7 +382,7 @@ public class FactorySimulation {
 		// 33% chance that an error will occure
 		
 		int i= r.nextInt(1,4);
-		if(i >0) {
+		if(i ==3) {
 			i = r.nextInt(1,101);
 			
 			//9% chance that it will be a longer error
@@ -422,7 +426,7 @@ public class FactorySimulation {
 				i = r.nextInt(1,101);
 				
 				if(i>43) {
-					//line2, m20 and 27 have higher chance for mid error
+					//line2, m20 and m27 have higher chance for mid error
 					i = r.nextInt(16,37);
 					if(i>29) {
 						if(i%2==2) {
@@ -441,7 +445,7 @@ public class FactorySimulation {
 				}
 				
 			}else {
-				
+				// all machines have same Chance for short error
 				setError(r.nextInt(1,30), r.nextInt(10,63), 3);
 				
 				
