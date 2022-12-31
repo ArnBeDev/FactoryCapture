@@ -1,7 +1,6 @@
 package factory;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,20 +13,19 @@ import http.HttpBroker;
 
 public class FactorySimulation {
 	
-	Calendar cl;
-	Date date;
-	int productId;
-	Factory factory;
-	int hourStart;
-	int hourHardEnd;
-	int hourLastPart;
-	HttpBroker broker;
+	private Calendar cl;
+	private Date date;
+	private int productId;
+	private Factory factory;
+	private int hourStart;
+	private int hourLastPart;
+	
 
 	public void startSimulation() {
 		createFactory();
 		
-		Date date = new Date(System.currentTimeMillis()); 
-		Calendar cl = new GregorianCalendar();
+		date = new Date(System.currentTimeMillis()); 
+		cl = new GregorianCalendar();
 		cl.setTimeZone(TimeZone.getTimeZone("GMT+1"));
 		cl.setTime(date);
 		long lastTime=0;
@@ -66,10 +64,10 @@ public class FactorySimulation {
 					
 				}
 				
-				
-				
+				HttpBroker broker = new HttpBroker();
 				broker.sendFactory(factory,lastTime);
-				
+				broker.start();
+			
 				
 			}
 		
@@ -363,7 +361,7 @@ public class FactorySimulation {
 	
 	
 	public FactorySimulation() {
-		 broker = new HttpBroker();
+	
 		 hourStart =3;
 		 hourLastPart =21;
 		 cl = new GregorianCalendar();

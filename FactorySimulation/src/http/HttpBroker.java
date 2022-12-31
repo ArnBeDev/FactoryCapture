@@ -9,15 +9,19 @@ import factory.FactoryLine;
 import factory.Machine;
 import factory.Unit;
 
-public class HttpBroker {
+public class HttpBroker extends Thread {
 	
 	
-	private String data ;
-	private String PostBody;
+
+	private String data;
+	private String backendAddress ="http://192.168.2.102:8080/sendmachine/";
+	String PostBody;
+	
 	
 	public void sendFactory(Factory factory, long timeStamp) {
 		data ="";
-		
+
+		PostBody ="";
 		for(FactoryLine fl  :factory.getFactoryLines()) {
 			for(Unit u : fl.getUnits()) {
 				for(Machine m : u.getMachines()) {
@@ -26,8 +30,6 @@ public class HttpBroker {
 				}
 			}
 		}
-		sendRequest();
-		
 		
 		
 		
@@ -35,11 +37,12 @@ public class HttpBroker {
 	
 	
 	private void addBody(int id, int s, float p , int w, long t) {
+	
 		if(data.equals("")) {
 			String st="{\"machineId\": "+ id+", " +"\"stateCode\": " + s +", " + "\"power\": " +p +", " +"\"workingOn\": " +w+ ", " +"\"timestamp\": " +t +"}";
 			
 			data +=st;
-		//	System.out.println(data);
+
 		}else {
 			data +=(" ,{"+ "\"machineId\": "+ id+", " +"\"stateCode\": " + s +", " + "\"power\": " +p +", " +"\"workingOn\": " +w+ ", " +"\"timestamp\": " +t+"}" ); 
 		}
@@ -48,10 +51,11 @@ public class HttpBroker {
 		
 	}
 	
+	
+	
 	private void sendRequest() {
 		
-		
-		PostBody = "[ " +data +"]";
+		 PostBody = "[ " +data +"]";
 		
 		
 		
@@ -59,7 +63,7 @@ public class HttpBroker {
 		
 		try {
 		
-			URL url = new URL("http://192.168.2.102:8080/sendmachine/");
+			URL url = new URL(backendAddress);
 			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
 			httpCon.setRequestProperty("Accept-Encoding", "application/json");
 			httpCon.setRequestProperty("Content-Type", "application/json");
@@ -80,8 +84,16 @@ public class HttpBroker {
 	
 		
 		
-		data ="";
+
 		PostBody ="";
+	}
+	
+	@Override	
+	public void run() {
+		
+		sendRequest();
+	
+	
 	}
 
 }

@@ -17,7 +17,7 @@ public class Machine {
 	
 	
 	
-	//status0 = ready; status 1 besetzt , status 2= arbeiten , rest errors
+	// 0=ready, 1= work done , 2= working , 3/4 errors
 	private int status;
 	
 	private int workingOn;
@@ -27,8 +27,6 @@ public class Machine {
 	int durationIndex;
 	
 	private int errorTime;// in seconds
-	private int weakErrorTime;
-
 	
 	
 	public Machine(int id) {
