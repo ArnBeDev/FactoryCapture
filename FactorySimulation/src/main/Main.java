@@ -14,7 +14,6 @@ public class Main {
 			FactorySimulation simulation = new FactorySimulation();
 			simulation.startSimulation();
 		
-		
 	}
 
 }

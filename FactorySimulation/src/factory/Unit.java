@@ -6,8 +6,8 @@ import java.util.List;
 public class Unit {
 	
 	
-	List<Machine> machines;
-	Unit nextUnit;
+	private List<Machine> machines;
+	private Unit nextUnit;
 	boolean lastUnit;
 	
 	

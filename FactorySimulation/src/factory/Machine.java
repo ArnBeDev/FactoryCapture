@@ -22,11 +22,15 @@ public class Machine {
 	
 	private int workingOn;
 	
+	//work and error times are in seconds
+	
 	private int workDuration;
 	private int[] workDurations;
 	private int durationIndex;
 	
-	private int errorTime;// in seconds
+	private int errorTime;
+	
+	
 	
 	
 	public Machine(int id) {

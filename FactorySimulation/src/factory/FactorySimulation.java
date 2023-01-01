@@ -351,9 +351,7 @@ public class FactorySimulation {
 	}
 	
 	private void updateTime() {
-		 date = new Date(System.currentTimeMillis()); 
-		
-		
+		 date = new Date(System.currentTimeMillis()); 		
 		cl.setTime(date);
 		
 		
@@ -367,15 +365,13 @@ public class FactorySimulation {
 		 cl = new GregorianCalendar();
 		 cl.setTimeZone(TimeZone.getTimeZone("GMT+1"));
 		 createFactory();
-		 
 		
 	}
 	
 	
 	
 	private void createErrorEvent() {
-		
-		
+			
 		Random r = new Random();
 		// 33% chance that an error will occure
 		

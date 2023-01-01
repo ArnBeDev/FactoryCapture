@@ -5,9 +5,7 @@ import java.util.List;
 public class FactoryLine {
 
 	
-	
 	List<Unit> units;
-	
 	
 	
 
