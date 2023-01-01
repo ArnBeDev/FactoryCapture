@@ -66,7 +66,7 @@ public class FactorySimulation {
 				
 				HttpBroker broker = new HttpBroker();
 				broker.sendFactory(factory,lastTime);
-				broker.start();
+				
 			
 				
 			}
@@ -194,8 +194,8 @@ public class FactorySimulation {
 		m15.setMaxPower(100, 300);
 		m15.setIdlePower(3, 15);
 		
-		Unit u10b = new Unit();
-		u10b.setMachines(List.of(m15));
+		Unit uLastL1 = new Unit();
+		uLastL1.setMachines(List.of(m15));
 		
 		
 		
@@ -208,12 +208,12 @@ public class FactorySimulation {
 		u7.setNextUnit(u8);
 		u8.setNextUnit(u9);
 		u9.setNextUnit(u10);
-		u10.setNextUnit(u10b);
-		u10b.setLastUnit(true);
+		u10.setNextUnit(uLastL1);
+		uLastL1.setLastUnit(true);
 		
 		
 		
-		fLine1.setUnits(List.of(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u10b));
+		fLine1.setUnits(List.of(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,uLastL1));
 		
 		
 		
@@ -233,7 +233,7 @@ public class FactorySimulation {
 		Machine m27 =new Machine(27);
 		Machine m28 =new Machine(28);
 		Machine m29 =new Machine(29);
-		Machine m30 =new Machine(30);
+	
 		
 		Unit u11 = new Unit();
 		Unit u12 = new Unit();
@@ -363,7 +363,7 @@ public class FactorySimulation {
 	public FactorySimulation() {
 	
 		 hourStart =3;
-		 hourLastPart =21;
+		 hourLastPart =23;
 		 cl = new GregorianCalendar();
 		 cl.setTimeZone(TimeZone.getTimeZone("GMT+1"));
 		 createFactory();
@@ -461,7 +461,7 @@ public class FactorySimulation {
 			for(Unit u : l.getUnits()) {
 				for(Machine m :u.getMachines()) {
 					if(m.getId() ==machineId) {
-						System.out.println("ERROR CREATED on : " +machineId);
+						System.out.println("ERROR CREATED on : " +machineId  + " with ErrorCode: " +errorCode);
 						m.setError(time, errorCode);
 					}
 				}

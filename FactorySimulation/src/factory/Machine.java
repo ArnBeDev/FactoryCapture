@@ -24,7 +24,7 @@ public class Machine {
 	
 	private int workDuration;
 	private int[] workDurations;
-	int durationIndex;
+	private int durationIndex;
 	
 	private int errorTime;// in seconds
 	
@@ -147,9 +147,6 @@ public class Machine {
 	}
 
 
-	public void setWorkDuration(int workDuration) {
-		this.workDuration = workDuration;
-	}
 
 
 	public int getErrorTime() {

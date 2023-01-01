@@ -15,8 +15,9 @@ public class HttpBroker extends Thread {
 
 	private String data;
 	private String backendAddress ="http://192.168.2.102:8080/sendmachine/";
-	String PostBody;
+	private String PostBody;
 	
+	public static int counter;
 	
 	public void sendFactory(Factory factory, long timeStamp) {
 		data ="";
@@ -30,6 +31,8 @@ public class HttpBroker extends Thread {
 				}
 			}
 		}
+		
+		this.start();
 		
 		
 		
@@ -58,9 +61,13 @@ public class HttpBroker extends Thread {
 		 PostBody = "[ " +data +"]";
 		
 		
-		
-		System.out.println( PostBody);
-		
+		if(counter %1 == 0) {
+			System.out.println( PostBody);
+			counter =0;
+			
+		}
+			counter++;
+			
 		try {
 		
 			URL url = new URL(backendAddress);
