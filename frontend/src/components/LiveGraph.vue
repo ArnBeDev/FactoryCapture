@@ -25,7 +25,7 @@
         labels: [1,2,3],
         datasets: [
           {
-            label: "Aktueller Verbrauch",
+            label: "Current power consumption",
             data: [12,15,20],
             fill: true,
             showLine: true,
