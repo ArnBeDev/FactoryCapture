@@ -6,6 +6,17 @@ import LiveChart from '@/components/LiveGraph.vue';
 const { isDarkTheme, contextPath } = useLayout();
 
 const products = ref(null);
+
+let today = reactive({
+
+});
+
+let idleData =reactive({
+
+}
+);
+
+
 const lineData = reactive({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
