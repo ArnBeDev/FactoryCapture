@@ -2,7 +2,7 @@
 import { onMounted, reactive, ReactiveEffect, ref, watch } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
 import LiveChart from '@/components/LiveGraph.vue';
-import LiveMachineStatePowerVue from '../components/LiveMachineStatePower.vue';
+import LiveMachine from '../components/LiveMachineStatePower.vue';
 import Axios from 'axios';
 const { isDarkTheme, contextPath } = useLayout();
 
@@ -246,15 +246,17 @@ watch(
               <h1 > {{ machines }}</h1>
 <h1>{{ err }}</h1>
 
-                
-                   <LiveMachineStatePowerVue/>
-                   <LiveChart/>
+               
+                  <LiveMachine/>
+                 
 
             </div>
      
+            
+           
            
           </div>
-                
+          <div>  </div>  
         
            
             

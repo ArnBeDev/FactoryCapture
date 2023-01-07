@@ -2,13 +2,14 @@
   <div style=" width: 200 vh; height: 75vh">
 
 
-<div id="123">
+
+    <canvas id="testghr"></canvas>
 
 </div>
 
 
 
-  </div>
+  
 </template>
 
 <script>
@@ -86,19 +87,18 @@ export default {
       machines: [],
       ids: [],
       err: '',
-
       idlePower: [],
       errorPower: [],
-      workingPower: []
+      workingPower: [],
     };
 
   },
   mounted() {
-    let ctx = document.getElementById("123");
+    let ctx = document.getElementById("testghr");
     chart = new Chart(ctx, barChartData);
 
-
-    myChartData.update("none");
+  
+   
     this.receiveData();
 
 
@@ -109,7 +109,7 @@ export default {
 
     async receiveData() {
       setInterval(() => {
-        axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.machines = response.data; this.createChartData(); }).catch(err => { this.err = err })
+        axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.machines=response.data; this.createChartData(); }).catch(err => { this.err = err })
       }, 6000);
 
 
@@ -122,7 +122,7 @@ export default {
       this.errorPower = [];
       this.workingPower = [];
 
-      this.machines.sort(compare);
+      this.machines.sort(this.compare);
 
       this.machines.forEach(machine => {
         this.ids.push(machine.id);
@@ -156,12 +156,12 @@ export default {
 
       barChartData.data.labels = this.ids;
       barChartData.data.datasets[0].data = this.workingPower;
-      barChartData.data.datasets[1].data = this.idlePower;
-      barChartData.data.datasets[2].data = this.errorPower;
+   
 
-
-
-      chart.update("none");
+      chart.data.datasets[0].data = this.workingPower;
+     
+      
+      chart.update();
 
 
     },
