@@ -14,7 +14,7 @@ public class HttpBroker extends Thread {
 	
 
 	private String data;
-	private String backendAddress ="http://localhost:8080/sendmachine/";
+	private String backendAddress ="http://192.168.2.102:8080/sendmachine/";
 	private String PostBody;
 	
 	public static int counter;

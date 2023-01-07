@@ -2,7 +2,8 @@
 import { onMounted, reactive, ReactiveEffect, ref, watch } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
 import LiveChart from '@/components/LiveGraph.vue';
-
+import LiveMachineStatePowerVue from '../components/LiveMachineStatePower.vue';
+import Axios from 'axios';
 const { isDarkTheme, contextPath } = useLayout();
 
 const products = ref(null);
@@ -10,7 +11,7 @@ const products = ref(null);
 let machines =[];
 let loaded =false ;
 
-
+let err;
 
 
 
@@ -46,40 +47,43 @@ const lineOptions = ref(null);
 
 
 onMounted(() => {
-  
+     
+
+  getData();
 });
 
 
-async function getData(){
-   
-    let err;
+  async function getData(){
+    
+
+    Axios.get('http://192.168.2.102:8080/api/live/').then((response) => {this.machines=response.data;createChartData();}).catch(err => {this.err=err});
   
-    axios.get('http://localhost:8080/api/livemachines').then((response) => {this.machines=response.data;createChartData();}).catch(err => {err=err})
 
 
  
-};
+}
 
-function createChartData(){
-
+ function createChartData(){
+   
+    this.loaded=true;
     let ids=[];
     let idlePower=[];
     let errorPower=[];
     let workingPower=[];
 
-machines.sort(compare);
+this.machines.sort(this.compare);
 
-machines.forEach(machine =>{
-ids.push(machine.machineId);
+this.machines.forEach(machine =>{
+ids.push(machine.id);
 
-if(machine.state ==2){
+if(machine.stateCode ==2){
 //working
 workingPower.push(machine.power)
 errorPower.push(null);
 idlePower.push(null);
 
 
-}else if(machine.state <2){
+}else if(machine.stateCode <2){
     //idle
     workingPower.push(null)
 errorPower.push(machine.power);
@@ -94,12 +98,18 @@ idlePower.push(machine.power);
 
 }
 
+
 })
 
 
-liveData = reactive({
+this.liveData = {
+    data:{
+
+  
  labels: ids,
  datasets:[
+
+ 
 { //working
     label:'working machines',
    data:workingPower,
@@ -121,31 +131,32 @@ liveData = reactive({
     fill:true,
     backgroundColor:'#900b0a',
     borderColor:'#5c0002'
+}]
+
 }
 
- ]
-
  
+}
 
 
-});
 
 
-loaded=true;
+
+this.loaded=true;
 
 }
 
 
 function compare(a,b){
-      if(a.machineId < b.machineId){
+      if(a.id < b.id){
         return -1;
       }
-      if(a.machineId >b.machineId){
+      if(a.id >b.id){
         return 1;
       }
       return 0;
   
-    };
+    }
 
 
 
@@ -229,18 +240,23 @@ watch(
     
         <div class="col-12 xl:col-6">
             <div class="card">
-                <h5>Sales Overview</h5>
+                <h5>Sales Overview {{ loaded }}</h5>
                 <Chart type="line" :data="lineData" :options="lineOptions" />
-               <Chart v-if="loaded" type="bar" :data ="liveData"/>
-              
+                
+              <h1 > {{ machines }}</h1>
+<h1>{{ err }}</h1>
 
+                
+                   <LiveMachineStatePowerVue/>
+                   <LiveChart/>
 
             </div>
      
-            <LiveChart/>
+           
           </div>
                 
         
            
             
 </template>
+

@@ -86,7 +86,7 @@
   
        async receiveData(){
          setInterval(() => {
-          axios.get('http://localhost:8080/api/v1/devices').then((response) => {this.devices=response.data;this.processData();}).catch(err => {this.err=err})
+          axios.get('http://192.168.2.102:8080/api/live/').then((response) => {this.devices=response.data;this.processData();}).catch(err => {this.err=err})
          }, 6000);
   
   
@@ -97,31 +97,24 @@
      this.ids=[];
   
       this.devices.forEach(device => {
-        this.ids.push(device.gid);
-        this.verbrauch.push(device.lastValue);
+        this.ids.push(device.id);
+        this.verbrauch.push(device.power);
       });
   
   
       barChartData.data.labels = this.ids;
       barChartData.data.datasets[0].data= this.verbrauch;
   
-      myChartData.data.datasets[0].data= this.verbrauch;
-      myChartData.labels= this.ids;
-     
-  
-  
-     
-      
      
       myChartData.update("none");
     
     },
   
     compare(a,b){
-      if(a.gid < b.gid){
+      if(a.id < b.id){
         return -1;
       }
-      if(a.gid >b.gid){
+      if(a.id >b.id){
         return 1;
       }
       return 0;

@@ -69,7 +69,7 @@ const isOutsideClicked = (event) => {
             <div class="layout-main">
                 <router-view></router-view>
 
-                <LiveGraph/>
+               
                
                 
                
