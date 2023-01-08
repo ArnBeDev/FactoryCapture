@@ -1,9 +1,8 @@
 <template>
-  <div style=" width: 200 vh; height: 75vh">
+  <div>
 
 
-
-    <canvas id="testghr"></canvas>
+   <canvas id="liveMachineStatePower"></canvas>
 
 </div>
 
@@ -17,7 +16,7 @@ import Chart from "chart.js/auto";
 import axios from 'axios';
 
 
-let chart = null;
+//let chart = null;
 
 
 
@@ -90,12 +89,13 @@ export default {
       idlePower: [],
       errorPower: [],
       workingPower: [],
+      chart: null,
     };
 
   },
   mounted() {
-    let ctx = document.getElementById("testghr");
-    chart = new Chart(ctx, barChartData);
+    let ctx = document.getElementById("liveMachineStatePower");
+    this.chart = new Chart(ctx,barChartData);
 
   
    
@@ -158,10 +158,10 @@ export default {
       barChartData.data.datasets[0].data = this.workingPower;
    
 
-      chart.data.datasets[0].data = this.workingPower;
+      this.chart.data.datasets[0].data = this.workingPower;
      
       
-      chart.update();
+      this.chart.update();
 
 
     },
