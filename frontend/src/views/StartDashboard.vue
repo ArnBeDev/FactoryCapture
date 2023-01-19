@@ -8,8 +8,8 @@ const { isDarkTheme, contextPath } = useLayout();
 
 const products = ref(null);
 
-let machines =[];
-let loaded =false ;
+let machines = [];
+let loaded = false;
 
 let err;
 
@@ -47,116 +47,116 @@ const lineOptions = ref(null);
 
 
 onMounted(() => {
-     
 
-  getData();
+
+    getData();
 });
 
 
-  async function getData(){
-    
-
-    Axios.get('http://192.168.2.102:8080/api/live/').then((response) => {this.machines=response.data;createChartData();}).catch(err => {this.err=err});
-  
+async function getData() {
 
 
- 
-}
-
- function createChartData(){
-   
-    this.loaded=true;
-    let ids=[];
-    let idlePower=[];
-    let errorPower=[];
-    let workingPower=[];
-
-this.machines.sort(this.compare);
-
-this.machines.forEach(machine =>{
-ids.push(machine.id);
-
-if(machine.stateCode ==2){
-//working
-workingPower.push(machine.power)
-errorPower.push(null);
-idlePower.push(null);
+    Axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.machines = response.data; createChartData(); }).catch(err => { this.err = err });
 
 
-}else if(machine.stateCode <2){
-    //idle
-    workingPower.push(null)
-errorPower.push(machine.power);
-idlePower.push(null);
 
-
-}else {
-    //error
-    workingPower.push(null)
-errorPower.push(null);
-idlePower.push(machine.power);
 
 }
 
+function createChartData() {
 
-})
+    this.loaded = true;
+    let ids = [];
+    let idlePower = [];
+    let errorPower = [];
+    let workingPower = [];
 
+    this.machines.sort(this.compare);
 
-this.liveData = {
-    data:{
+    this.machines.forEach(machine => {
+        ids.push(machine.id);
 
-  
- labels: ids,
- datasets:[
-
- 
-{ //working
-    label:'working machines',
-   data:workingPower,
-   fill:true,
-   backgroundColor: '#00bb7e',
-            borderColor: '#00bb7e',
-
-},{
-    //idle
-    label:'idle machines',
-    data:idlePower,
-    fill:true,
-    backgroundColor: '#2f4860',
-            borderColor: '#2f4860',
-},{
-    //error
-    label:'error machines',
-    data:errorPower,
-    fill:true,
-    backgroundColor:'#900b0a',
-    borderColor:'#5c0002'
-}]
-
-}
-
- 
-}
+        if (machine.stateCode == 2) {
+            //working
+            workingPower.push(machine.power)
+            errorPower.push(null);
+            idlePower.push(null);
 
 
+        } else if (machine.stateCode < 2) {
+            //idle
+            workingPower.push(null)
+            errorPower.push(machine.power);
+            idlePower.push(null);
 
 
+        } else {
+            //error
+            workingPower.push(null)
+            errorPower.push(null);
+            idlePower.push(machine.power);
 
-this.loaded=true;
-
-}
+        }
 
 
-function compare(a,b){
-      if(a.id < b.id){
-        return -1;
-      }
-      if(a.id >b.id){
-        return 1;
-      }
-      return 0;
-  
+    })
+
+
+    this.liveData = {
+        data: {
+
+
+            labels: ids,
+            datasets: [
+
+
+                { //working
+                    label: 'working machines',
+                    data: workingPower,
+                    fill: true,
+                    backgroundColor: '#00bb7e',
+                    borderColor: '#00bb7e',
+
+                }, {
+                    //idle
+                    label: 'idle machines',
+                    data: idlePower,
+                    fill: true,
+                    backgroundColor: '#2f4860',
+                    borderColor: '#2f4860',
+                }, {
+                    //error
+                    label: 'error machines',
+                    data: errorPower,
+                    fill: true,
+                    backgroundColor: '#900b0a',
+                    borderColor: '#5c0002'
+                }]
+
+        }
+
+
     }
+
+
+
+
+
+    this.loaded = true;
+
+}
+
+
+function compare(a, b) {
+    if (a.id < b.id) {
+        return -1;
+    }
+    if (a.id > b.id) {
+        return 1;
+    }
+    return 0;
+
+}
 
 
 
@@ -237,56 +237,76 @@ watch(
 </script>
 
 <template>
-    
-        <div class="col-12 xl:col-6">
-            <div class="card">
+    <div class="grid">
+        <div class="col-1 xl:col-6">
+
+
+
+            <div class="card mb-0">
                 <h5>Sales Overview {{ loaded }}</h5>
                 <Chart type="line" :data="lineData" :options="lineOptions" />
-                
 
-              
+
+
 
             </div>
+
+
+
+
+
+
             <div class="card">
                 <h5> Current power per Machine</h5>
-                <LiveMachine/>
+                <LiveMachine />
             </div>
-              
-               
-            
-           
-           
-          </div>
 
-          <div class="col-12 xl:col-6">
-            <div class="card">
-                <h5>Recent produced parts</h5>
-                <DataTable :value="products" :rows="5" :paginator="true" responsiveLayout="scroll">
-                    <Column style="width: 15%">
-                        <template #header> Image </template>
-                        <template #body="slotProps">
-                            <img :src="contextPath + 'demo/images/product/' + slotProps.data.image" :alt="slotProps.data.image" width="50" class="shadow-2" />
-                        </template>
-                    </Column>
-                    <Column field="name" header="Name" :sortable="true" style="width: 35%"></Column>
-                    <Column field="price" header="Price" :sortable="true" style="width: 35%">
-                        <template #body="slotProps">
-                            {{ formatCurrency(slotProps.data.price) }}
-                        </template>
-                    </Column>
-                    <Column style="width: 15%">
-                        <template #header> View </template>
-                        <template #body>
-                            <Button icon="pi pi-search" type="button" class="p-button-text"></Button>
-                        </template>
-                    </Column>
-                </DataTable>
-            </div>
-            </div>
-         
-       
-        
-           
-            
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="col-12 xl:col-6">
+        <div class="card">
+            <h5>Recent produced parts</h5>
+            <DataTable :value="products" :rows="5" :paginator="true" responsiveLayout="scroll">
+                <Column style="width: 15%">
+                    <template #header> Image </template>
+                    <template #body="slotProps">
+                        <img :src="contextPath + 'demo/images/product/' + slotProps.data.image"
+                            :alt="slotProps.data.image" width="50" class="shadow-2" />
+                    </template>
+                </Column>
+                <Column field="name" header="Name" :sortable="true" style="width: 35%"></Column>
+                <Column field="price" header="Price" :sortable="true" style="width: 35%">
+                    <template #body="slotProps">
+                        {{ formatCurrency(slotProps.data.price) }}
+                    </template>
+                </Column>
+                <Column style="width: 15%">
+                    <template #header> View </template>
+                    <template #body>
+                        <Button icon="pi pi-search" type="button" class="p-button-text"></Button>
+                    </template>
+                </Column>
+            </DataTable>
+        </div>
+    </div>
+
+
+
+
+
 </template>
 
