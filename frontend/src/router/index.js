@@ -4,7 +4,7 @@ import AppLayout from '@/layout/AppLayout.vue';
 
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -15,17 +15,34 @@ const router = createRouter({
         path:'/',
         name:'dashboard',
         component: () => import('@/views/StartDashboard.vue')
+      },{
+        path:'/live',
+        name:'live',
+        component: () => import('@/views/LiveView.vue')
       },
+      {
+        path:'/machines',
+        name:'live',
+        component: () => import('@/views/MachinesView.vue')
+      },
+      {
+        path:'/factory',
+        name:'factory',
+        component: () => import('@/views/FactoryView.vue')
+      },
+      {
+        path:'/produce',
+        name:'produce',
+        component: () => import('@/views/ProduceView.vue')
+      },
+      {
+        path:'/errors',
+        name:'errors',
+        component: () => import('../views/AboutView.vue')
+      }
       ]
     },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
+   
   ]
 })
 

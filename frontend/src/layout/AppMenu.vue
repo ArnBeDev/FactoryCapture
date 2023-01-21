@@ -3,6 +3,24 @@ import { ref } from 'vue';
 
 import AppMenuItem from './AppMenuItem.vue';
 
+
+const menuItems =ref([{
+
+
+label:'Factory Capture',
+items:[{label:'Dashboard', icon:'pi pi-fw pi-home', to: '/' },
+{label:'Live ', icon:'pi pi-fw pi-home', to: '/live' },
+{label:'Machines ', icon:'pi pi-fw pi-home', to: '/machines' },
+{label:'Factory ', icon:'pi pi-fw pi-home', to: '/factory' },
+{label:'Produced parts ', icon:'pi pi-fw pi-home', to: '/produce' },
+{label:'Problems/Errors ', icon:'pi pi-fw pi-home', to: '/errors' }
+
+
+]
+
+}]);
+
+
 const model = ref([
     {
         label: 'Home',
@@ -161,15 +179,11 @@ const model = ref([
 
 <template>
     <ul class="layout-menu">
-        <template v-for="(item, i) in model" :key="item">
+        <template v-for="(item, i) in menuItems" :key="item">
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
-        <li>
-            <a href="https://www.primefaces.org/primeblocks-vue/#/" target="_blank">
-                <img src="/layout/images/banner-primeblocks.png" alt="Prime Blocks" class="w-full mt-3" />
-            </a>
-        </li>
+    
     </ul>
 </template>
 
