@@ -9,11 +9,11 @@ const menuItems =ref([{
 
 label:'Factory Capture',
 items:[{label:'Dashboard', icon:'pi pi-fw pi-home', to: '/' },
-{label:'Live ', icon:'pi pi-fw pi-home', to: '/live' },
-{label:'Machines ', icon:'pi pi-fw pi-home', to: '/machines' },
-{label:'Factory ', icon:'pi pi-fw pi-home', to: '/factory' },
-{label:'Produced parts ', icon:'pi pi-fw pi-home', to: '/produce' },
-{label:'Problems/Errors ', icon:'pi pi-fw pi-home', to: '/errors' }
+{label:'Live ', icon:'pi pi-bolt', to: '/live' },
+{label:'Machines ', icon:'pi pi-chart-bar', to: '/machines' },
+{label:'Factory ', icon:'pi pi-building', to: '/factory' },
+{label:'Produced parts ', icon:'pi pi-box', to: '/produce' },
+{label:'Problems/Errors ', icon:'pi pi-exclamation-triangle', to: '/errors' }
 
 
 ]
