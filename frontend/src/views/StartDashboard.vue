@@ -49,7 +49,7 @@ const lineOptions = ref(null);
 onMounted(() => {
 
 
-    getData();
+  
 });
 
 

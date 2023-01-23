@@ -16,7 +16,7 @@ import Chart from "chart.js/auto";
 import axios from 'axios';
 
 
-//let chart = null;
+let chart = null;
 
 
 
@@ -134,7 +134,7 @@ export default {
           this.idlePower.push(0);
 
 
-        } else if (machine.stateCode > 2) {
+        } else if (machine.stateCode < 2) {
           //idle
           this.workingPower.push(0);
           this.errorPower.push(machine.power);
@@ -162,7 +162,7 @@ export default {
      
       
       this.chart.update();
-
+      barChartData.update();
 
     },
 

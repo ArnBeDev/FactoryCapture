@@ -12,7 +12,7 @@ import ProgressSpinner from 'primevue/progressspinner';
 import Calendar from 'primevue/calendar';
 import StyleClass from 'primevue/styleclass';
 import InputNumber from 'primevue/inputnumber';
-
+import axios from 'axios';
 
 const app = createApp(App)
 
@@ -24,10 +24,10 @@ app.use(PrimeVue, { ripple: true });
 
 app.directive('styleclass', StyleClass);
 
-
-app.component('ProgressSpinner',ProgressSpinner)
-app.component('InputNumber', InputNumber)
-app.component('Button',Button)
+app.component('Axios' ,axios);
+app.component('ProgressSpinner',ProgressSpinner);
+app.component('InputNumber', InputNumber);
+app.component('Button',Button);
 app.component('Dropdown', Dropdown);
 app.component('InputText', InputText);
 app.component('Calendar', Calendar);;

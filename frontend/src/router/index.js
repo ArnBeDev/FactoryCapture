@@ -22,7 +22,7 @@ const router = createRouter({
       },
       {
         path:'/machines',
-        name:'live',
+        name:'machines',
         component: () => import('@/views/MachinesView.vue')
       },
       {
