@@ -2,13 +2,13 @@
   <div>
 
 
-   <canvas id="liveMachineStatePower"></canvas>
+    <canvas id="liveMachineStatePower"></canvas>
 
-</div>
+  </div>
 
 
 
-  
+
 </template>
 
 <script>
@@ -95,10 +95,10 @@ export default {
   },
   mounted() {
     let ctx = document.getElementById("liveMachineStatePower");
-    this.chart = new Chart(ctx,barChartData);
+    this.chart = new Chart(ctx, barChartData);
 
-  
-   
+
+
     this.receiveData();
 
 
@@ -109,7 +109,7 @@ export default {
 
     async receiveData() {
       setInterval(() => {
-        axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.machines=response.data; this.createChartData(); }).catch(err => { this.err = err })
+        axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.machines = response.data; this.createChartData(); }).catch(err => { this.err = err })
       }, 6000);
 
 
@@ -156,13 +156,13 @@ export default {
 
       barChartData.data.labels = this.ids;
       barChartData.data.datasets[0].data = this.workingPower;
-   
+
 
       this.chart.data.datasets[0].data = this.workingPower;
-     
-      
+
+
       this.chart.update();
-      barChartData.update();
+      
 
     },
 

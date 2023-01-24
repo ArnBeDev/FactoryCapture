@@ -1,22 +1,50 @@
 <template>
     <h1> Graph</h1>
-    <canvas id="piestate"></canvas>
+     <p>{{ responseData }}</p>
+        <canvas id="piestate"></canvas>
+    
 </template>
 
 <script>
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
+import axios from 'axios';
+import { ref } from 'vue';
+let chartData = {
 
-let chartData = null;
-let chart = null;
+    type: 'pie',
+    data: {
+        labels: ['wait for data'],
+        datasets: [{
+            data: [1],
+            backGroundColor: ['#5c0002']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Current Machinestates'
+            }
+        }
+    },
+
+};
+
+
 
 export default {
     name: "PieGraphState",
     data() {
-        return{
-            responseData :[],
-            error: ''
+        return {
+            responseData: [],
+            error: '',
+            chart :null
         }
-     
+
     },
 
     created() {
@@ -24,7 +52,8 @@ export default {
 
     },
     mounted() {
-       
+        let ctx = document.getElementById('piestate');
+        this.chart = new Chart(ctx, chartData);
         this.getData();
     },
 
@@ -32,7 +61,7 @@ export default {
     methods: {
 
         async getData() {
-            Axios.getData('http://192.168.2.102:8080/api/live/').then((response) => { this.responseData = response.data; this.processData(); }).catch((error) => this.error = error)
+            axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.responseData = response.data; this.processData(); }).catch((error) => this.error = error)
 
         },
 
@@ -69,55 +98,18 @@ export default {
                 labels: ['Waiting for next Production Part', 'Work Done, waiting for next Machine to be Ready', 'Working', 'Error', 'Fatal Error'],
                 datasets: [
                     {
-                        label: 'Idle, wait for next part',
-                        data: countIdleE,
-                        backGroundColor: '#ffea00'
-                    },
-                    {
-                        label: 'Idle, wait for next machine',
-                        data: countIdleO,
-                        backGroundColor: '#f0c419'
-                    },
-                    {
-                        label: 'Working',
-                        data: countW,
-                        backGroundColor: '#ffea00'
-                    },
-                    {
-                        label: 'Normal Error',
-                        data: countE1,
-                        backGroundColor: '#ff2d00'
-                    },
-                    {
-                        label: 'Fatal Error',
-                        data: countE2,
-                        backGroundColor: '#5c0002'
+                     
+                        data: [countIdleE,countIdleO,countW,countE1,countE2],
+                        backGroundColor: ['#ffea00','#f0c419','#ffea00','#ff2d00','#5c0002']
                     }
+                 
                 ]
             };
 
-            chartData = {
+            this.chart.data =data;
 
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Current Machinestates'
-                        }
-                    }
-                },
-
-            }
-
-            let ctx = document.getElementById('piestate');
-            chart = new Chart(ctx, chartData);
-
+            this.chart.update();
+           
 
 
         }
