@@ -1,6 +1,6 @@
 <template>
     <h1> Graph</h1>
-     <p>{{ responseData }}</p>
+     <p>{{ amountWorking }}</p>
         <canvas id="piestate"></canvas>
     
 </template>
@@ -8,15 +8,18 @@
 <script>
 import { Chart } from 'chart.js/auto';
 import axios from 'axios';
-import { ref } from 'vue';
+
+let chart =null;
+
 let chartData = {
 
     type: 'pie',
+    methods:{},
     data: {
-        labels: ['wait for data'],
+        labels: ['wait for data', 'other','idk'],
         datasets: [{
-            data: [1],
-            backGroundColor: ['#5c0002']
+            data: [1,2],
+            backgroundColor :['#2e7d32','#00305a','#f2b705','#d23600','#d23600'],
         }]
     },
     options: {
@@ -42,18 +45,24 @@ export default {
         return {
             responseData: [],
             error: '',
-            chart :null
-        }
+            amountWorking:0,
+            amountIdleEmpty:0,
+            amountIdleWaiting:0,
+            amountError:0,
+            amountErrorFatal:0,
+            
+        };
 
     },
 
     created() {
-
+        
 
     },
     mounted() {
         let ctx = document.getElementById('piestate');
-        this.chart = new Chart(ctx, chartData);
+        chart = new Chart(ctx, chartData);
+        chart.update();
         this.getData();
     },
 
@@ -66,49 +75,48 @@ export default {
         },
 
         processData() {
-            let countIdleEmpty = 0;
-            let countIdleOccupied = 0;
-            let countWorking = 0;
-            let countError1 = 0;
-            let countError2 = 0;
+            this.amountWorking =1223;
+            this.amountWorking=0;
+            this.amountIdleEmpty=0;
+            this.amountIdleWaiting=0;
+           this.amountError=0;
+            this.amountErrorFatal=0;
+            
 
-            this.responseData.array.forEach(element => {
+            this.responseData.forEach(element => {
                 if (element.stateCode == 0) {
                     //Idle
-                    countIdleEmpty++;
+                    this.amountIdleEmpty++;
                 } else if (element.stateCode == 1) {
-                    countIdleOccupied++;
+                    this.amountIdleWaiting++;
                 }
                 else if (element.stateCode == 2) {
-                    countWorking++;
+                    this.amountWorking++;
                 } else if (element.stateCode == 3) {
                     // normal error
-                    countError1++;
+                    this.amountError++;
                 } else if (element.stateCode == 4) {
                     //fatal error
-                    countError2++;
+                    this.amountErrorFatal++;
                 }
             });
-            this.createChartData(countIdleEmpty, countIdleOccupied, countWorking, countError1, countError2)
+            chartData.data.labels = ['Working', 'Idle Empty','Idle Wait','Error' ,  'Fatal Error']
+           chartData.data.datasets[0].data = [this.amountWorking,this.amountIdleEmpty,this.amountIdleWaiting,this.amountError,this.amountErrorFatal];
+
+         //  chartData.data.datasets[0].backGroundColor =['#2e7d32','#00305a','#f2b705','#d23600','#d23600'];
+
+           chart.update();
+           
 
         },
 
-        createChartData(countIdleE, countIdleO, countW, countE1, countE2) {
-            let data = {
-                labels: ['Waiting for next Production Part', 'Work Done, waiting for next Machine to be Ready', 'Working', 'Error', 'Fatal Error'],
-                datasets: [
-                    {
-                     
-                        data: [countIdleE,countIdleO,countW,countE1,countE2],
-                        backGroundColor: ['#ffea00','#f0c419','#ffea00','#ff2d00','#5c0002']
-                    }
-                 
-                ]
-            };
+        createChartData() {
+        
+            chartData.data.labels = ['Working', 'Idle Empty','Idle Wait','Error' ,  'Fatal Error']
+           chartData.data.datasets[0].data = [this.amountWorking,this.amountIdleEmpty,this.amountIdleWaiting,this.amountError,this.amountErrorFatal];
+           chartData.data.datasets[0].backgroundColor =['#2e7d32','#00305a','#f2b705','#d23600','#d23600'];
 
-            this.chart.data =data;
-
-            this.chart.update();
+           chart.update();
            
 
 

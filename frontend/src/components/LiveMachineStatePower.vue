@@ -89,13 +89,13 @@ export default {
       idlePower: [],
       errorPower: [],
       workingPower: [],
-      chart: null,
+   
     };
 
   },
   mounted() {
     let ctx = document.getElementById("liveMachineStatePower");
-    this.chart = new Chart(ctx, barChartData);
+    chart = new Chart(ctx, barChartData);
 
 
 
@@ -134,7 +134,7 @@ export default {
           this.idlePower.push(0);
 
 
-        } else if (machine.stateCode < 2) {
+        } else if (machine.stateCode > 2) {
           //idle
           this.workingPower.push(0);
           this.errorPower.push(machine.power);
@@ -156,12 +156,14 @@ export default {
 
       barChartData.data.labels = this.ids;
       barChartData.data.datasets[0].data = this.workingPower;
+      barChartData.data.datasets[1].data = this.idlePower;
+      barChartData.data.datasets[2].data = this.errorPower;
+    
 
 
-      this.chart.data.datasets[0].data = this.workingPower;
+      
 
-
-      this.chart.update();
+      chart.update();
       
 
     },
