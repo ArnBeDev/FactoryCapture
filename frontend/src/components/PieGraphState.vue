@@ -1,6 +1,6 @@
 <template>
-    <h1> Graph</h1>
-     <p>{{ amountWorking }}</p>
+    <h5> Graph</h5>
+    
         <canvas id="piestate"></canvas>
     
 </template>
