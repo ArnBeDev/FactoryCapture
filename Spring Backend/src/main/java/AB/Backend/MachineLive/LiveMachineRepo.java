@@ -19,7 +19,7 @@ public class LiveMachineRepo {
 
     }
 
-    public void updateMachine(int id,float power,double timeStamp,byte stateCode,int workingOn){
+    public void updateMachine(int id,float power,long timeStamp,byte stateCode,int workingOn){
         for (LiveMachine machine: machines
              ) {
 

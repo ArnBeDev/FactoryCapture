@@ -38,10 +38,10 @@ public class MachineBrokerController
 
     @PutMapping
     public void receiveStates(@RequestBody List<MachineState> machineStateList){
-        System.out.println("received machinedata, machines: " +machineStateList.size());
+       // System.out.println("received machinedata, machines: " +machineStateList.size());
 
-        System.out.println(machineStateList.toString());
-        //machineStateService.addMachineStates(machineStateList);
+       // System.out.println(machineStateList.toString());
+        machineStateService.addMachineStates(machineStateList);
 
     }
 

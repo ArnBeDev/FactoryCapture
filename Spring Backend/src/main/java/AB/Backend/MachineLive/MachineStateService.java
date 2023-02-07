@@ -38,10 +38,11 @@ public class MachineStateService {
 
     public void addMachineStates(List<MachineState> machineStateList){
         for(MachineState ms :machineStateList){
-            liveMachineRepo.updateMachine(ms.getId(),ms.getPower(),ms.getTimestamp(),ms.getStateCode(),ms.getWorkingOn());
+            liveMachineRepo.updateMachine(ms.getMachineId(),ms.getPower(),ms.getTimestamp(),ms.getStateCode(),ms.getWorkingOn());
+            ms.setId(getId());
             machineStateRepository.save(ms);
         }
-        System.out.println("MachineStatesList saved");
+      //  System.out.println("MachineStatesList saved");
     }
 
 

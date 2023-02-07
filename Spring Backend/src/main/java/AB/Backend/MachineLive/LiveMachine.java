@@ -14,10 +14,10 @@ public class LiveMachine {
     private byte stateCode;
     private int workingOn;
 
-    private double time;
+    private long time;
 
 
-    public void update(int id, float power, byte stateCode,int workingOn,double time){
+    public void update(int id, float power, byte stateCode,int workingOn,long time){
         this.id =id;
         this.power = power;
         this.stateCode = stateCode;
@@ -26,7 +26,7 @@ public class LiveMachine {
 
     }
 
-    public LiveMachine( int id,float power, byte stateCode, int workingOn, double time) {
+    public LiveMachine( int id,float power, byte stateCode, int workingOn, long time) {
         this.power = power;
         this.id = id;
         this.stateCode = stateCode;
