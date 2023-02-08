@@ -44,9 +44,25 @@ public class PartService {
 
         }
 
+        boolean found;
         for (Integer i: inProduction
              ) {
-            if()
+
+            found = false;
+            for (MachineState s: states
+                 ) {
+                if(s.getWorkingOn() ==i){
+                    found = true;
+                    break;
+                }
+
+
+                }
+            if(!found){
+                inProduction.remove(i);
+            }
+
+
         }
 
 

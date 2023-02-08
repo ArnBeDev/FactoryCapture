@@ -17,7 +17,9 @@ public class TimeRange implements  Comparable<TimeRange>{
         this.endTime= endTime;
     }
 
+public TimeRange(){
 
+}
 
 
     @Override
