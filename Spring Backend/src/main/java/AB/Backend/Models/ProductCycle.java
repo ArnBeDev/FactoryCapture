@@ -28,6 +28,12 @@ timeRange = new TimeRange();
         timeRange = new TimeRange();
         timeRange.setStartTime(firstSeen);
     }
+    public ProductCycle(int line, long firstSeen,long lastSeen){
+        this.line = line;
+        timeRange = new TimeRange();
+        timeRange.setStartTime(firstSeen);
+        timeRange.setEndTime(lastSeen);
+    }
 
     public void setLastSeen(long l){
         timeRange.setEndTime(l);

@@ -2,6 +2,7 @@ package AB.Backend.Broker;
 
 import AB.Backend.MachineLive.MachineState;
 import AB.Backend.MachineLive.MachineStateService;
+import AB.Backend.ProducedParts.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +14,12 @@ public class MachineBrokerController
 {
 
     private final MachineStateService machineStateService;
-
+    private final PartService partService;
     @Autowired
-    public MachineBrokerController(MachineStateService machineStateService){
+    public MachineBrokerController(MachineStateService machineStateService,PartService partService){
 
     this.machineStateService=machineStateService;
+    this.partService = partService;
     }
 
     //http://localhost:8080/sendmachine/1?s=2&p=85.43&w=13&t=240001.444
@@ -42,6 +44,7 @@ public class MachineBrokerController
 
        // System.out.println(machineStateList.toString());
         machineStateService.addMachineStates(machineStateList);
+        partService.passNewMachineStates(machineStateList);
 
     }
 
