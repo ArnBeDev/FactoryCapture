@@ -19,7 +19,7 @@ public class FactorySimulation {
 	private Factory factory;
 	private int hourStart;
 	private int hourLastPart;
-	
+	public static boolean FASTMODE = true;// fastmode for better debuging
 
 	public void startSimulation() {
 		createFactory();

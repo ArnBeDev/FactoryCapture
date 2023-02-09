@@ -11,7 +11,7 @@ import factory.Unit;
 
 public class HttpBroker extends Thread {
 	
-	
+	// For each PUT a new Thread will be created
 
 	private String data;
 	private String backendAddress ="http://192.168.2.102:8080/sendmachine/";

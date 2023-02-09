@@ -94,6 +94,10 @@ public class Machine {
 		workDurations = new int[5];
 		for(int i =0; i<workDurations.length;i++) {
 			workDurations[i] = r.nextInt(min, max+1); 
+			if(FactorySimulation.FASTMODE) {
+				workDurations[i] =2;
+			}
+			
 		}
 		durationIndex =0;
 		
