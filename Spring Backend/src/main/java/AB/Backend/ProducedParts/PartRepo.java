@@ -1,8 +1,14 @@
 package AB.Backend.ProducedParts;
 
+import AB.Backend.MachineLive.MachineState;
+import org.springframework.data.couchbase.repository.CouchbaseRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 
-public interface PartRepo {
+@Repository
+public interface PartRepo extends CouchbaseRepository<Part,Integer> {
+    @Override
+    Optional<Part> findById(Integer integer);
 
 }

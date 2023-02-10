@@ -23,12 +23,12 @@ public class Part {
     private int line;
 
 
-    Part(){
+    public Part(){
         this.id =null;
 
     }
 
-    Part(Integer id, long productionStart, long productionEnd,int line){
+    public Part(Integer id, long productionStart, long productionEnd,int line){
         this.id=id;
         this.productionStart=productionStart;
         this.productionEnd=productionEnd;

@@ -42,7 +42,7 @@ public class MachineHour {
 
     public MachineHour(List<MachineTenMinutes> tenMinutesMachines){
         this.machineTenList = new ArrayList<MachineTenMinutes>();
-        processTenMinutes();
+       // processTenMinutes();
 
 
     }

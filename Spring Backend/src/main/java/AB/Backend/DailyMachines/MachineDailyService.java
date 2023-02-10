@@ -14,4 +14,9 @@ public class MachineDailyService {
     }
 
 
+
+    public void testSaveInBucket(MachineDaily md){
+        machineDailyRepo.save(md);
+    }
+
 }

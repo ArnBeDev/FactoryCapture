@@ -12,15 +12,15 @@ import java.util.*;
 @Service
 public class PartService {
 
-   // private final PartRepo partRepo;
+    private final PartRepo partRepo;
     private final PartRecentRepo recentRepo;
 
     private int sizeOfRecentParts;
 
 
     @Autowired
-    public PartService(PartRecentRepo partRecentRepo){
-        //this.partRepo=partRepo;
+    public PartService(PartRecentRepo partRecentRepo,PartRepo partRepo){
+        this.partRepo=partRepo;
         this.recentRepo = partRecentRepo;
         sizeOfRecentParts =15;
     }
@@ -117,7 +117,9 @@ public class PartService {
 
 
 
-
+    public void testSaveInBucket(Part p){
+        partRepo.save(p);
+    }
 
 
 

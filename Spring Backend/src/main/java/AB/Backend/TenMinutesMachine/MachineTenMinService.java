@@ -14,6 +14,10 @@ public class MachineTenMinService {
     }
 
 
+    public void testSaveTenMinutes(MachineTenMinutes mt){
+        machineTenMinuteRepo.save(mt);
+    }
+
 
 
 

@@ -3,14 +3,20 @@ package AB.Backend.DailyMachines;
 import AB.Backend.HourMachine.MachineHour;
 import AB.Backend.Models.MachineStatus;
 import AB.Backend.Models.TimeRange;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.couchbase.core.mapping.Document;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
+@Document
+@Getter
+@Setter
 public class MachineDaily {
-
+    @Id
     private int machineId;
 
     private float powerAVG;
@@ -30,7 +36,7 @@ public class MachineDaily {
     private TreeMap<TimeRange, MachineStatus> timeLine;
 
     public MachineDaily(List<MachineHour> machineHourList){
-        processHourMachines(machineHourList);
+        //processHourMachines(machineHourList);
 
 
     }
