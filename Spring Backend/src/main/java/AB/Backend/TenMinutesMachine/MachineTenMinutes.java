@@ -7,6 +7,8 @@ import AB.Backend.Models.TimeRange;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.couchbase.core.mapping.Document;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
@@ -65,21 +67,26 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
         }
 
 
+        public MachineTenMinutes(){
+
+        }
+
 
         public void addMachineStates(List<MachineState> ms){
             Collections.sort(ms);
+            init();
 
             int currentState=0;
             int currentWorkOn=-1;
             long startTime=0;
-
+            int powerCounter=0;
 
             for(int i =0;i<ms.size();i++){
                 MachineState machine = ms.get(i);
                 addPower(machine.getPower());
                 addWorkedOn(machine.getWorkingOn());
                 addState(machine.getStateCode());
-
+                powerCounter++;
                 if(i>0){
 
                     if(currentState !=machine.getStateCode() || i ==ms.size()){
@@ -172,6 +179,13 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
     @Override
     public int compareTo(MachineTenMinutes ms) {
         return this.startTime < ms.getStartTime() ? -1 : (this.getStartTime() == ms.getStartTime() ? 0 : 1);
+    }
+
+    private void init(){
+        timeLine = new TreeMap<TimeRange,MachineStatus>();
+        stateCodes = new ArrayList<Byte>();
+        workedOn = new ArrayList<Integer>();
+
     }
 
 }

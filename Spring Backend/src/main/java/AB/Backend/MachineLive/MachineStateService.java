@@ -64,5 +64,8 @@ public class MachineStateService {
         return liveMachineRepo.getLiveMachineById(id);
     }
 
+    public List<MachineState> getMachineStatesByTimeRange(long startTime, long endTime){
+        return machineStateRepository.findBetweenTime(startTime,endTime);
+    }
 
 }

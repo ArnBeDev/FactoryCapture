@@ -3,6 +3,8 @@ package AB.Backend.TenMinutesMachine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MachineTenMinService {
 
@@ -19,6 +21,10 @@ public class MachineTenMinService {
     }
 
 
+
+    public List<MachineTenMinutes> getMachineTenMinutesByTimeRange(long startTime, long endTime){
+       return machineTenMinuteRepo.findBetweenTime(startTime,endTime);
+    }
 
 
 

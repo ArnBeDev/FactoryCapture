@@ -93,7 +93,7 @@ public class PartService {
 
 
                 //TODO connect bucket
-                //p.save
+                partRepo.save(p);
 
                 recentParts.add(p);
                 while(recentParts.size() >sizeOfRecentParts){
