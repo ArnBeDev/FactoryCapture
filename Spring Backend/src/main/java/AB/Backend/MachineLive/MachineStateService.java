@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class MachineStateService {
 
-    private int idCounter;
     private final MachineStateRepository machineStateRepository;
     private final LiveMachineRepo liveMachineRepo;
 
@@ -22,15 +21,14 @@ public class MachineStateService {
         this.machineStateRepository = machineStateRepository;
 
         this.liveMachineRepo = liveMachineRepo;
-        //TODO find highest Id in repo =idCounter+1 ;s
-        idCounter =1;
+
     }
     public void addMachineState(int id,long t,float p,byte state, int wOn){
 
 
         liveMachineRepo.updateMachine(id,p,t,state,wOn);
 
-        MachineState ms = new MachineState(getId(),id,t,p,state,wOn);
+        MachineState ms = new MachineState(id,t,p,state,wOn);
 
 
         machineStateRepository.save(ms);
@@ -39,22 +37,17 @@ public class MachineStateService {
     public void addMachineStates(List<MachineState> machineStateList){
         for(MachineState ms :machineStateList){
             liveMachineRepo.updateMachine(ms.getMachineId(),ms.getPower(),ms.getTimestamp(),ms.getStateCode(),ms.getWorkingOn());
-            ms.setId(getId());
+
             machineStateRepository.save(ms);
         }
       //  System.out.println("MachineStatesList saved");
     }
 
 
-    private int getId(){
-        if(idCounter >1000000){
-            idCounter =1;
-        }
-        return idCounter++;
-    }
+
 
     public List<MachineState> getAllMachineStates  (){
-        return machineStateRepository.findAll();
+        return machineStateRepository.findAllByTimestampBetween(0,99999999999999l);
     }
 
     public List<LiveMachine> getLiveData(){
@@ -65,7 +58,7 @@ public class MachineStateService {
     }
 
     public List<MachineState> getMachineStatesByTimeRange(long startTime, long endTime){
-        return machineStateRepository.findBetweenTime(startTime,endTime);
+        return machineStateRepository.findAllByTimestampBetween(startTime,endTime);
     }
 
 }

@@ -75,7 +75,7 @@ public class RegularJobs {
         System.out.println("endTime:min: " +calendar.get(Calendar.MINUTE)  +" sec:"+calendar.get(Calendar.SECOND));
 
         endTime =calendar.getTimeInMillis();
-        //processTenMinuteJob(startTime,endTime);
+        processTenMinuteJob(startTime,endTime);
 
         // Delete older states
 
@@ -100,7 +100,8 @@ public class RegularJobs {
 
     @Transactional
     public void processTenMinuteJob(long startTime, long endTime){
-        List<MachineState> machineStatesList=  stateRepo.findBetweenTime(startTime,endTime);
+        List<MachineState> machineStatesList=  stateRepo.findAllByTimestampBetween(startTime,endTime);
+        System.out.println("Size of found states: " +machineStatesList.size());
 
         for(int i = 0; i<machineStatesList.size();i++){
             int id = machineStatesList.get(i).getMachineId();
@@ -134,7 +135,7 @@ public class RegularJobs {
     }
 
     private void processHourlyJob(long starTime,long endTime){
-            List<MachineTenMinutes> allMachineTenMinutes = tenMinuteRepo.findBetweenTime(starTime,endTime);
+            List<MachineTenMinutes> allMachineTenMinutes = tenMinuteRepo.findByStartTimeBetween(starTime,endTime);
 
             for(int i =0; i<allMachineTenMinutes.size();i++){
 

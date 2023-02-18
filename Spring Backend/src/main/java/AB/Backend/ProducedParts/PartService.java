@@ -48,7 +48,7 @@ public class PartService {
             if(s.getWorkingOn() >0 && !inProduction.containsKey(s.getWorkingOn())){
 
                 int line;
-                if(s.getId()<15){
+                if(s.getMachineId()<15){
                     line =1;
                 }else{
                     line =2;

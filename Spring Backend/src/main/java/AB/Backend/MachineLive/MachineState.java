@@ -14,9 +14,10 @@ import java.util.Comparator;
 @Setter
 @Getter
 public class MachineState implements Comparable<MachineState> {
-
 @Id
-    private Integer id;
+private String id;
+
+
     private int machineId;
     private long timestamp;
     private float power;
@@ -30,16 +31,16 @@ public class MachineState implements Comparable<MachineState> {
 
 
 
-    public MachineState(int id,byte s,float p,int w,long t){
+    public MachineState(int machineId,byte s,float p,int w,long t){
 
-        this.machineId =id;
+        this.machineId =machineId;
         this.timestamp = t;
         this.power = p;
         this.stateCode=s;
         this.workingOn = w;
     }
-    public MachineState(int id,int machineId,long timestamp,float power,byte stateCode,int workingOn){
-        this.id = id;
+    public MachineState(int machineId,long timestamp,float power,byte stateCode,int workingOn){
+
         this.machineId =machineId;
         this.timestamp = timestamp;
         this.power = power;
@@ -48,7 +49,7 @@ public class MachineState implements Comparable<MachineState> {
     }
 
     public MachineState() {
-        this.id = null;
+
     }
 
 

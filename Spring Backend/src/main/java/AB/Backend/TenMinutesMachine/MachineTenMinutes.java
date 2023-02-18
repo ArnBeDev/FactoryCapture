@@ -6,6 +6,7 @@ import AB.Backend.Models.MachineStatus;
 import AB.Backend.Models.TimeRange;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ import java.util.TreeMap;
 @Document
 public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
 
-    private int id;
     private int machineId;
     private double startTime;
     private float power;
@@ -62,10 +62,10 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
 
 
 
-        public MachineTenMinutes(int id,double startTime){
-
-        }
-
+public MachineTenMinutes(int id, long startTime){
+        this.machineId =id;
+        this.startTime =startTime;
+}
 
         public MachineTenMinutes(){
 
@@ -148,8 +148,8 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
         }
 
 
-    public MachineTenMinutes(int id, double startTime, float power, int workingTime, int idleTime, int errorTime, List<Byte> stateCodes, List<Integer> workedOn) {
-        this.id = id;
+    public MachineTenMinutes(int machineId, double startTime, float power, int workingTime, int idleTime, int errorTime, List<Byte> stateCodes, List<Integer> workedOn) {
+        this.machineId = machineId;
         this.startTime = startTime;
         this.power = power;
         this.workingTime = workingTime;
@@ -167,7 +167,7 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
 
     public MachineTenMinutes getCopy(){
             return new MachineTenMinutes(
-                    this.id,this.startTime,this.power,this.workingTime,this.idleTime,
+                    this.machineId,this.startTime,this.power,this.workingTime,this.idleTime,
                     this.errorTime,this.stateCodes,this.workedOn
             );
 
