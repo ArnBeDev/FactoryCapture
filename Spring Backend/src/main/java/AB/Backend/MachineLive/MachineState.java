@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
+import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 import org.springframework.data.couchbase.core.mapping.id.IdAttribute;
 
 import java.util.Comparator;
@@ -15,9 +17,8 @@ import java.util.Comparator;
 @Getter
 public class MachineState implements Comparable<MachineState> {
 @Id
-private String id;
-
-
+@GeneratedValue(strategy = GenerationStrategy.UNIQUE)
+    private String id;
     private int machineId;
     private long timestamp;
     private float power;

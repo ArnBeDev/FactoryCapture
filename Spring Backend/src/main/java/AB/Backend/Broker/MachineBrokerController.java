@@ -33,7 +33,7 @@ public class MachineBrokerController
     @Autowired
     public MachineBrokerController(MachineStateService machineStateService, PartService partService,
                                    MachineTenMinService mtService,MachineHourService mhService, MachineDailyService mdService){
-    debug = true;
+    debug = false;
     this.machineStateService=machineStateService;
     this.partService = partService;
     this.tenMinService = mtService;
