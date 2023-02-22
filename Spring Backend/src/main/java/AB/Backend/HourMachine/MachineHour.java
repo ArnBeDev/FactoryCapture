@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
+import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 
 import java.util.*;
 
@@ -22,7 +24,8 @@ public class MachineHour {
 
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
+    private String id;
     private int machineId;
     private List<Integer> workedOn;
 
@@ -37,6 +40,8 @@ public class MachineHour {
 
     private int timePerPart;
     private double actualTime;
+
+    private long startTime;
 
     private TreeMap<TimeRange, MachineStatus> timeLine;
 

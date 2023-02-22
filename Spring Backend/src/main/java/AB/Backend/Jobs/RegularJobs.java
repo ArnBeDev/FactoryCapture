@@ -19,6 +19,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @EnableScheduling
@@ -51,6 +52,8 @@ public class RegularJobs {
         long endTime =0;
 
 
+
+
         Date date = new Date(System.currentTimeMillis());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -60,19 +63,25 @@ public class RegularJobs {
         int startMinute;
         if(endMinute == 0){
             startMinute =50;
-            calendar.set(calendar.YEAR,calendar.MONTH,calendar.DATE,calendar.HOUR_OF_DAY-1,startMinute,0);
+            calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY)-1,startMinute,0);
 
         }else{
             startMinute = endMinute-10;
-            calendar.set(calendar.YEAR,calendar.MONTH,calendar.DATE,calendar.HOUR_OF_DAY,startMinute,0);
+            calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),startMinute,0);
 
         }
 
         System.out.println("starTime min:"+ calendar.get(Calendar.MINUTE) +" sek:"+calendar.get(Calendar.SECOND));
 
         startTime =calendar.getTimeInMillis();
-        calendar.set(calendar.YEAR,calendar.MONTH,calendar.DATE,calendar.HOUR_OF_DAY,endMinute-1,59);
+
+        System.out.println("Calendar Year:" +calendar.YEAR);
+        System.out.println("startTime after get milis"+ startTime);
+                calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),endMinute-1,59);
         System.out.println("endTime:min: " +calendar.get(Calendar.MINUTE)  +" sec:"+calendar.get(Calendar.SECOND));
+        System.out.println("startTime after set"+ startTime);
+
+
 
         endTime =calendar.getTimeInMillis();
         processTenMinuteJob(startTime,endTime);

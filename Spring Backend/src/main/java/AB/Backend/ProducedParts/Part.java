@@ -11,7 +11,7 @@ import org.springframework.data.couchbase.core.mapping.Field;
 @Document
 public class Part {
 
-
+@Id
     private Integer id;
     @Field
     private long productionStart;

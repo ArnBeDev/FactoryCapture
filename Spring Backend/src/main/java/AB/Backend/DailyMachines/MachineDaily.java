@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
+import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +19,8 @@ import java.util.TreeMap;
 @Setter
 public class MachineDaily {
     @Id
-    private int machineId;
-
+    @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
+    private String id;
     private float powerAVG;
     private float powerIdle;
     private float powerPeak;
@@ -33,6 +35,7 @@ public class MachineDaily {
     private double actualTime;
     private int timePerPart;
 
+    private long startTime;
     private TreeMap<TimeRange, MachineStatus> timeLine;
 
     public MachineDaily(List<MachineHour> machineHourList){

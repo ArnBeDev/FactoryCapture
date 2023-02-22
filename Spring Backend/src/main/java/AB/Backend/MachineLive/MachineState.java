@@ -16,15 +16,13 @@ import java.util.Comparator;
 @Setter
 @Getter
 public class MachineState implements Comparable<MachineState> {
+
 @Id
 @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
     private String id;
     private int machineId;
     private long timestamp;
     private float power;
-
-
-    //1 = idle, 2= working, 0=maintance  , 3/4 leichte/starke einschränkungen, ab 5 defekt
 
     private byte stateCode;
     private int workingOn;
