@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "FactorySimulation/1.0.0": {
+        "runtime": {
+          "FactorySimulation.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FactorySimulation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

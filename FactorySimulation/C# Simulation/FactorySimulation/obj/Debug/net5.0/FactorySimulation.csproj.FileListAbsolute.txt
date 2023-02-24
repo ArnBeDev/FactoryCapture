@@ -1,0 +1,32 @@
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.exe
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.deps.json
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.runtimeconfig.json
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.runtimeconfig.dev.json
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.dll
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\ref\FactorySimulation.dll
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.pdb
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.csproj.AssemblyReference.cache
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.AssemblyInfoInputs.cache
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.AssemblyInfo.cs
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.csproj.CoreCompileInputs.cache
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.dll
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\ref\FactorySimulation.dll
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.pdb
+C:\Users\Arnt\source\repos\FactorySimulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.genruntimeconfig.cache
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.exe
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.deps.json
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.runtimeconfig.json
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.runtimeconfig.dev.json
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.dll
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\ref\FactorySimulation.dll
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\bin\Debug\net5.0\FactorySimulation.pdb
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.csproj.AssemblyReference.cache
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.AssemblyInfoInputs.cache
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.AssemblyInfo.cs
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.csproj.CoreCompileInputs.cache
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.dll
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\ref\FactorySimulation.dll
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.pdb
+C:\Users\Arnt\Documents\Project\Git\FactorySimulation\C# Simulation\FactorySimulation\obj\Debug\net5.0\FactorySimulation.genruntimeconfig.cache
