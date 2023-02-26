@@ -21,6 +21,8 @@ public class MachineDaily {
     @Id
     @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
     private String id;
+
+    private int machineId;
     private float powerAVG;
     private float powerIdle;
     private float powerPeak;
@@ -41,6 +43,10 @@ public class MachineDaily {
     public MachineDaily(List<MachineHour> machineHourList){
         //processHourMachines(machineHourList);
 
+
+    }
+
+    public MachineDaily(){
 
     }
 

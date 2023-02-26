@@ -20,7 +20,7 @@ public class HttpBroker extends Thread {
 	// For each PUT a new Thread will be created
 
 	private String data;
-	private String backendAddress ="http://192.168.2.102:8080/sendmachine/";
+	private String backendAddress ="http://127.0.0.1:8080/sendmachine/";
 	
 	
 	private static int counter; // only for debug

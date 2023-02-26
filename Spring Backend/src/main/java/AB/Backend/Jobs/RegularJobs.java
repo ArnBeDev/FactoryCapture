@@ -144,7 +144,7 @@ public class RegularJobs {
     }
 
     private void processHourlyJob(long starTime,long endTime){
-            List<MachineTenMinutes> allMachineTenMinutes = tenMinuteRepo.findByStartTimeBetween(starTime,endTime);
+            List<MachineTenMinutes> allMachineTenMinutes = tenMinuteRepo.findAllByStartTimeBetween(starTime,endTime);
 
             for(int i =0; i<allMachineTenMinutes.size();i++){
 

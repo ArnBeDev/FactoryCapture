@@ -36,12 +36,12 @@ public class Config extends AbstractCouchbaseConfiguration {
 
     @Override
     public String getUserName() {
-        return "admin";
+        return "backend";
     }
 
     @Override
     public String getPassword() {
-        return "abc123";
+        return "backend123";
     }
 
     @Override

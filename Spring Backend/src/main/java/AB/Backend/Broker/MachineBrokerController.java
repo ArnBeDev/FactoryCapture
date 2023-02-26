@@ -22,7 +22,6 @@ import java.util.List;
 public class MachineBrokerController
 {
 
-    private boolean debug;
     private final MachineStateService machineStateService;
     private final PartService partService;
 
@@ -33,7 +32,7 @@ public class MachineBrokerController
     @Autowired
     public MachineBrokerController(MachineStateService machineStateService, PartService partService,
                                    MachineTenMinService mtService,MachineHourService mhService, MachineDailyService mdService){
-    debug = false;
+
     this.machineStateService=machineStateService;
     this.partService = partService;
     this.tenMinService = mtService;
@@ -59,42 +58,19 @@ public class MachineBrokerController
 
     @PutMapping
     public void receiveStates(@RequestBody List<MachineState> machineStateList){
-       // System.out.println("received machinedata, machines: " +machineStateList.size());
 
-       // System.out.println(machineStateList.toString());
+
         machineStateService.addMachineStates(machineStateList);
+
+
         partService.passNewMachineStates(machineStateList);
 
-        if(debug){
-            testBuckets();
-            debug = false;
-        }
+
+
 
     }
 
-    void testBuckets(){
-        Part p = new Part(99999999,5,10,1);
-        partService.testSaveInBucket(p);
 
-        List<Byte> states = new ArrayList<Byte>();
-        byte b1 =1;
-        byte b2 = 3;
-
-    //        states.add(b1,b2);
-        MachineTenMinutes m10 = new MachineTenMinutes(99,44,555,
-                33,155,5,List.of((byte)4,(byte)3),List.of(9999,19999));
-
-  tenMinService.testSaveTenMinutes(m10);
-
-        MachineHour mHour = new MachineHour(List.of(m10));
-        mHour.setMachineId(101);
-        machineHourService.testSaveHourMachine(mHour);
-
-        MachineDaily mdaily = new MachineDaily(List.of(mHour));
-        mdaily.setMachineId(222);
-        machineDailyService.testSaveInBucket(mdaily);
-
-    }
 
 
 }

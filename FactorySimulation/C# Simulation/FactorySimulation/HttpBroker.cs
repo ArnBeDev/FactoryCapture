@@ -14,7 +14,7 @@ namespace FactorySimulation
 	
 
 		private String _data;
-		private String _backendAddress = "http://192.168.2.102:8080/sendmachine/";
+		private String _backendAddress = "http://127.0.0.1:8080/sendmachine/";
 		private  HttpClient client;
 
 		public static int _counter;

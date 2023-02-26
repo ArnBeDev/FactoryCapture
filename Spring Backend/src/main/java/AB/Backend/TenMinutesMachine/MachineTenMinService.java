@@ -23,7 +23,7 @@ public class MachineTenMinService {
 
 
     public List<MachineTenMinutes> getMachineTenMinutesByTimeRange(long startTime, long endTime){
-       return machineTenMinuteRepo.findByStartTimeBetween(startTime,endTime);
+       return machineTenMinuteRepo.findAllByStartTimeBetween(startTime,endTime);
     }
 
 
