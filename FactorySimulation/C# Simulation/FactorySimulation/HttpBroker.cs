@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -50,14 +51,14 @@ namespace FactorySimulation
 
 			if (_data.Equals(""))
 			{
-				String st = "{\"machineId\": " + id + ", " + "\"stateCode\": " + s + ", " + "\"power\": " + p + ", " + "\"workingOn\": " + w + ", " + "\"timestamp\": " + t + "}";
+				String st = "{\"machineId\": " + id + ", " + "\"stateCode\": " + s + ", " + "\"power\": " + p.ToString(CultureInfo.InvariantCulture) + ", " + "\"workingOn\": " + w + ", " + "\"timestamp\": " + t + "}";
 
 				_data += st;
 
 			}
 			else
 			{
-				_data += (" ,{" + "\"machineId\": " + id + ", " + "\"stateCode\": " + s + ", " + "\"power\": " + p + ", " + "\"workingOn\": " + w + ", " + "\"timestamp\": " + t + "}");
+				_data += (" ,{" + "\"machineId\": " + id + ", " + "\"stateCode\": " + s + ", " + "\"power\": " + p.ToString(CultureInfo.InvariantCulture) + ", " + "\"workingOn\": " + w + ", " + "\"timestamp\": " + t + "}");
 			}
 
 
