@@ -107,36 +107,43 @@ public class RegularJobs {
 
     }
 
-    @Transactional
+
     public void processTenMinuteJob(long startTime, long endTime){
         List<MachineState> machineStatesList=  stateRepo.findAllByTimestampBetween(startTime,endTime);
         System.out.println("Size of found states: " +machineStatesList.size());
 
-        for(int i = 0; i<machineStatesList.size();i++){
-            int id = machineStatesList.get(i).getMachineId();
 
-            MachineTenMinutes machineTenMinutes= new MachineTenMinutes(id,startTime);
-            List<MachineState> machineStates = new ArrayList<>();
-            for(int j = i;j<machineStatesList.size();j++){
-                if(machineStatesList.get(j).getMachineId() == id){
 
-                    machineStates.add(machineStatesList.get(j));
+            while(machineStatesList.size()>0){
 
-                    machineStatesList.remove(j);
-                    j--;
+                int id = machineStatesList.get(0).getMachineId();
+
+                MachineTenMinutes machineTenMinutes= new MachineTenMinutes(id,startTime);
+                List<MachineState> machineStates = new ArrayList<>();
+
+                for(int j = 0;j<machineStatesList.size();j++){
+                    if(machineStatesList.get(j).getMachineId() == id){
+
+                        machineStates.add(machineStatesList.get(j));
+
+                        machineStatesList.remove(j);
+                        j--;
+
+                    }
+
+                        machineTenMinutes.addMachineStates(machineStates);
+
+
+                    tenMinuteRepo.save(machineTenMinutes);
 
                 }
-                if(j ==machineStatesList.size()){
-                    machineTenMinutes.addMachineStates(machineStates);
-                }
 
-                tenMinuteRepo.save(machineTenMinutes);
-                machineStatesList.remove(i);
-                i--;
+
+
 
             }
 
-        }
+
 
 
 

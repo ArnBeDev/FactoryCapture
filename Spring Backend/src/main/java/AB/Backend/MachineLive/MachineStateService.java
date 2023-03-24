@@ -16,11 +16,15 @@ public class MachineStateService {
     private final MachineStateRepository machineStateRepository;
     private final LiveMachineRepo liveMachineRepo;
 
+
+    private boolean test;
     @Autowired
     public MachineStateService(MachineStateRepository machineStateRepository, LiveMachineRepo liveMachineRepo){
         this.machineStateRepository = machineStateRepository;
 
         this.liveMachineRepo = liveMachineRepo;
+
+        test = true;
 
     }
     public void addMachineState(int id,long t,float p,byte state, int wOn){
@@ -39,6 +43,12 @@ public class MachineStateService {
             liveMachineRepo.updateMachine(ms.getMachineId(),ms.getPower(),ms.getTimestamp(),ms.getStateCode(),ms.getWorkingOn());
 
             machineStateRepository.save(ms);
+        }
+
+
+        if(test){
+            test = false;
+            machineStateRepository.findByMachineId(5);
         }
       //  System.out.println("MachineStatesList saved");
     }

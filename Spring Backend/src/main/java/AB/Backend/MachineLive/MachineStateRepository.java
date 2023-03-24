@@ -10,14 +10,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MachineStateRepository extends CrudRepository<MachineState,Integer> {
+public interface MachineStateRepository extends CrudRepository<MachineState,String> {
 
     @Override
-    Optional<MachineState> findById(Integer integer);
+    Optional<MachineState> findById(String s);
 
+    List<MachineState> findAllByTimestampBetween(long startTime, long endTime);
 
+    List<MachineState> findByMachineId(Integer id);
 
-    List<MachineState> findAllByTimestampBetween(long startTime,long endTime);
 
 
 }

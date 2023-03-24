@@ -6,6 +6,7 @@ import AB.Backend.Models.TimeRange;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
@@ -38,7 +39,14 @@ public class MachineDaily {
     private int timePerPart;
 
     private long startTime;
+
+    @Transient
     private TreeMap<TimeRange, MachineStatus> timeLine;
+
+    private long[] timeRanges;
+    private int[] machineStatus;
+
+
 
     public MachineDaily(List<MachineHour> machineHourList){
         //processHourMachines(machineHourList);

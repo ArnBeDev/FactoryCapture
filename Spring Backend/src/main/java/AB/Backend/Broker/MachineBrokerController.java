@@ -25,6 +25,7 @@ public class MachineBrokerController
     private final MachineStateService machineStateService;
     private final PartService partService;
 
+    private boolean test;
     private final MachineTenMinService tenMinService; //only for debugging
     private final MachineHourService machineHourService;//only for debugging
     private final MachineDailyService machineDailyService;//only for debugging
@@ -38,6 +39,8 @@ public class MachineBrokerController
     this.tenMinService = mtService;
     this.machineHourService = mhService;
     this.machineDailyService = mdService;
+
+    test = true;
     }
 
     //http://localhost:8080/sendmachine/1?s=2&p=85.43&w=13&t=240001.444
@@ -64,6 +67,8 @@ public class MachineBrokerController
 
 
         partService.passNewMachineStates(machineStateList);
+
+
 
 
 

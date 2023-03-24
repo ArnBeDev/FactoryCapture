@@ -7,26 +7,28 @@ import java.sql.Time;
 
 @Getter
 @Setter
-public class TimeRange implements  Comparable<TimeRange>{
+public class TimeRange implements Comparable<TimeRange> {
 
     long startTime;
     long endTime;
 
-    public TimeRange(long startTime,long endTime){
-        this.startTime=startTime;
-        this.endTime= endTime;
+    public TimeRange(long startTime, long endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-public TimeRange(){
 
-}
+
+    public TimeRange(){
+
+    }
 
 
     @Override
     public int compareTo(TimeRange o) {
-        if(this.startTime< o.getStartTime()){
+        if (this.startTime < o.getStartTime()) {
             return -1;
-        }else if(this.startTime > o.getStartTime()){
+        } else if (this.startTime > o.getStartTime()) {
             return 1;
         }
 

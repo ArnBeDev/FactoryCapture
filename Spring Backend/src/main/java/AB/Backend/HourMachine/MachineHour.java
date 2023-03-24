@@ -7,11 +7,14 @@ import AB.Backend.TenMinutesMachine.MachineTenMinutes;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 
 import java.util.*;
+
+import static AB.Backend.FactoryStructure.Machine.getTimeRangeMachineStatusTreeMap;
 
 @Document
 @Getter
@@ -43,7 +46,12 @@ public class MachineHour {
 
     private long startTime;
 
+    @Transient
     private TreeMap<TimeRange, MachineStatus> timeLine;
+
+    private long[] timeRange;
+    private int[] machineStatus;
+
 
     public MachineHour(List<MachineTenMinutes> tenMinutesMachines){
         this.machineTenList = new ArrayList<MachineTenMinutes>();
@@ -110,11 +118,14 @@ public class MachineHour {
         }
     }
 
-    private void processTimeLine(){
-        //find
+    public TreeMap<TimeRange, MachineStatus> getTimeLine(){
+
+        return getTimeRangeMachineStatusTreeMap(timeRange, machineStatus);
 
 
     }
+
+
 
 
 }

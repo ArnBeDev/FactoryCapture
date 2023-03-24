@@ -20,7 +20,7 @@ public class MachineState implements Comparable<MachineState> {
 @Id
 @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
     private String id;
-    private int machineId;
+    private Integer machineId;
     private long timestamp;
     private float power;
 

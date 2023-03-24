@@ -4,9 +4,11 @@ import AB.Backend.FactoryStructure.Machine;
 import AB.Backend.MachineLive.MachineState;
 import AB.Backend.Models.MachineStatus;
 import AB.Backend.Models.TimeRange;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
@@ -16,10 +18,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 
+import static AB.Backend.FactoryStructure.Machine.getTimeRangeMachineStatusTreeMap;
+
+
 @Getter
 @Setter
 @Document
 public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
+
+
     @Id
     @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
     private String id;
@@ -39,7 +46,13 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
     private List<Byte> stateCodes;
     private List<Integer> workedOn;
 
+
+    @Getter(AccessLevel.NONE)
+    @Transient
     private TreeMap<TimeRange, MachineStatus> timeLine;
+
+    private long[] timeRange;
+    private int[] machineStatus;
 
     private void addState(byte state) {
         if (stateCodes.contains(state)) {
@@ -191,5 +204,15 @@ public MachineTenMinutes(int id, long startTime){
         workedOn = new ArrayList<Integer>();
 
     }
+
+
+    public TreeMap<TimeRange, MachineStatus> getTimeLine(){
+
+        return getTimeRangeMachineStatusTreeMap(timeRange, machineStatus);
+
+
+    }
+
+
 
 }
