@@ -17,7 +17,36 @@ import axios from 'axios';
 
 
 let chart = null;
+let options = {
+  animations:false,
+  scales: {
+    x: {
+      barPercentage: 1.6,
+      display: true,
+      grid: {
 
+        color: function (context) {
+          return 'rgba(29,140,248,0.4';
+        },
+
+      }
+    },
+    y: {
+      grid: {
+        color: function (context) {
+
+
+          return 'rgba(29,140,248,0.4';
+
+
+
+        },
+      },
+    },
+
+  },
+
+};
 
 
 let barChartData = {
@@ -57,22 +86,7 @@ let barChartData = {
 
     ],
   },
-  options: {
-    plugins: {
-      legend: {
-        labels: {
-          font: {
-            size: 16,
-          },
-        },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
+  options:options
 };
 
 
