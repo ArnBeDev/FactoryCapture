@@ -6,6 +6,12 @@ import AppSidebar from './AppSidebar.vue';
 import AppConfig from './AppConfig.vue';
 import { useLayout } from '@/layout/composables/layout';
 import LiveGraph from '../components/LiveGraph.vue';
+import { useToast } from 'primevue/usetoast';
+
+
+
+
+
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout();
 
@@ -59,6 +65,8 @@ const isOutsideClicked = (event) => {
 </script>
 
 <template>
+
+<Toast/>
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
         <div class="layout-sidebar">

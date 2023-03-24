@@ -5,6 +5,11 @@ import LiveChart from '@/components/LiveGraph.vue';
 import LiveMachine from '../components/LiveMachineStatePower.vue';
 import Axios from 'axios';
 import { parseStringStyle } from '@vue/shared';
+import { useToast } from 'primevue/usetoast';
+
+
+
+const toast = useToast();
 const { isDarkTheme, contextPath } = useLayout();
 
 const products = ref(null);
@@ -16,7 +21,7 @@ let machines = [];
 let loaded = false;
 
 let inProduction =reactive([]);
-let error;
+let error =ref(null);
 
 let debug = [];
 
@@ -63,7 +68,7 @@ onMounted(() => {
 async function getMachineData() {
 
 
-    Axios.get('http://192.168.2.102:8080/api/live/').then((response) => { responseData = response.data; processProductionParts(); }).catch(err => { error = err });
+    Axios.get('http://192.168.2.102:8080/api/live/').then((response) => { responseData = response.data; processProductionParts(); }).catch(err => { error = err; showError('Connection to Backend failed'); } );
 
 
 
@@ -303,6 +308,15 @@ watch(
     },
     { immediate: true }
 );
+
+const showError=(message) =>{
+
+    console.log("toast message");
+    toast.add({ severity: 'error', summary: 'Error', detail: message, life: 3000 });
+
+
+};
+
 </script>
 
 <template>
@@ -312,13 +326,15 @@ watch(
 
 
             <div class="card">
+              
                 <div class="flex justify-content-between align-items-center mb-5">
                     <h5>In Production</h5>
-                 
+                    <h3>{{ error }}</h3>
                 </div>
 
             <div v-if="inProduction==null">
                 <h5>Nothing in Production</h5>
+
             </div>
             <div v-else>
                
