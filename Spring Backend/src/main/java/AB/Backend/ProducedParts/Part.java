@@ -3,8 +3,11 @@ package AB.Backend.ProducedParts;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +25,8 @@ public class Part {
     private int line;
 
 
+@Transient
+private List<Integer> machines;
     public Part(){
         this.id =null;
 
