@@ -3,6 +3,8 @@ package AB.Backend.HourMachine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MachineHourService {
 
@@ -15,7 +17,10 @@ public class MachineHourService {
     }
 
 
-    public void testSaveHourMachine(MachineHour mHour){
-    machineHourRepo.save(mHour);
+
+
+    public List<MachineHour> getBetween(int id, long start, long end){
+
+        return machineHourRepo.findAllByIdAndsAndStartTimeBetween(id,start,end);
     }
 }

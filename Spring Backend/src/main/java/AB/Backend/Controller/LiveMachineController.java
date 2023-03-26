@@ -1,4 +1,4 @@
-package AB.Backend.MachineLive;
+package AB.Backend.Controller;
 
 import AB.Backend.MachineLive.LiveMachine;
 import AB.Backend.MachineLive.MachineStateService;
@@ -23,13 +23,7 @@ public class LiveMachineController {
 
     @GetMapping(path ="/")
     public List<LiveMachine> getLiveData(@RequestParam(required = false) String id){
-
-
-
-        System.out.println("GET LIVE DATA");
-
         if(id ==null){
-            System.out.println("ALLES");
             return machineStateService.getLiveData();
         }else {
             try{
@@ -38,10 +32,7 @@ public class LiveMachineController {
             }catch(Exception e){
                 return machineStateService.getLiveData();
             }
-
         }
-
-
     }
 
 

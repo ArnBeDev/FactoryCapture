@@ -71,4 +71,10 @@ public class MachineStateService {
         return machineStateRepository.findAllByTimestampBetween(startTime,endTime);
     }
 
+
+    public List<MachineState> getStatesBetween(int id,long startTime,long endTime){
+        return machineStateRepository.findAllByIdAndTimestampBetween(id,startTime,endTime);
+
+    }
+
 }

@@ -1,5 +1,7 @@
-package AB.Backend.ProducedParts;
+package AB.Backend.Controller;
 
+import AB.Backend.ProducedParts.Part;
+import AB.Backend.ProducedParts.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class PartController {
     }
 
 
-@GetMapping
+  @GetMapping
 
     public List<Part> recentlyProduced(){
         return partService.getRecentlyProducedParts();

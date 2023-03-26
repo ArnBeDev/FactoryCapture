@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RestController, API for receiving machine data
+ */
 @RestController
 @RequestMapping("/sendmachine/")
 public class MachineBrokerController

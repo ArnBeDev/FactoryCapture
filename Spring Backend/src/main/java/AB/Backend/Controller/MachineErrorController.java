@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ *
+ * Restcontroller, API for Machine Errors
+ */
 @RestController
 @RequestMapping(path ="/api/error")
 public class MachineErrorController {

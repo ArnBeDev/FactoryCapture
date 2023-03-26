@@ -11,6 +11,9 @@ import java.util.List;
 public interface MachineDailyRepo extends CouchbaseRepository<MachineDaily, Integer> {
 
 
-    List<MachineDaily> findAllByStartTimeBetween(long startTime, long endTime);
+
+    List<MachineDaily> findTop7ByIdOOrderByStartTime(int id);
+
+    List<MachineDaily> findByIdAndsAndStartTimeBetween(int id, long startTime,long endTime);
 
 }

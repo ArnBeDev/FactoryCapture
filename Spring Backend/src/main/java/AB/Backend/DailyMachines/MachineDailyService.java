@@ -3,6 +3,9 @@ package AB.Backend.DailyMachines;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Service
 public class MachineDailyService {
@@ -15,8 +18,13 @@ public class MachineDailyService {
 
 
 
-    public void testSaveInBucket(MachineDaily md){
-        machineDailyRepo.save(md);
-    }
+   public List<MachineDaily> getLast7(@PathVariable int id){
+
+        return machineDailyRepo.findTop7ByIdOOrderByStartTime(id);
+   }
+   public List<MachineDaily> getBetween(int id, long startTime,long endTime){
+        return machineDailyRepo.findByIdAndsAndStartTimeBetween(id,startTime,endTime);
+   }
+
 
 }

@@ -17,7 +17,9 @@ import org.springframework.data.couchbase.core.convert.translation.JacksonTransl
 import org.springframework.data.couchbase.repository.config.ReactiveRepositoryOperationsMapping;
 import org.springframework.data.couchbase.repository.config.RepositoryOperationsMapping;
 
-
+/**
+ * Configuration, contains the configuration to access couchbase database
+ */
 @Configuration
 public class Config extends AbstractCouchbaseConfiguration {
 

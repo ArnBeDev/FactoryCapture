@@ -19,6 +19,8 @@ public interface MachineStateRepository extends CrudRepository<MachineState,Stri
 
     List<MachineState> findByMachineId(Integer id);
 
+    List<MachineState> findAllByIdAndTimestampBetween(int id, long startTime, long endTime);
+
 
 
 }

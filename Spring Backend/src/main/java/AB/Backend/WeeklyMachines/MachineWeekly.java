@@ -16,6 +16,8 @@ public class MachineWeekly {
     private int machineId;
 
 
+    private long timeStamp;
+
 
 
 
