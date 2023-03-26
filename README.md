@@ -11,13 +11,13 @@ Backend:
  -these data can be accessed over a web-api  
  
  Frontend:  
-  -written Javascript with Vue.js as Frontend framework  
+  -written in Javascript with Vue.js as Frontend framework  
   -live overview over the factory  
   -allows to analyse the productivity of the machines  
   -allows machine error backtracing  
   -allows production backtracing  
 
 Factory Simulation:  
- -written in c# and java  
+ -written in C# and Java  
  -sends every seconds a HTTP Request to the backend with machinedata  
  -is a good option as long as you do not have your own factory  
