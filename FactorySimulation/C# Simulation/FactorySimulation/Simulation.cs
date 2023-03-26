@@ -16,7 +16,7 @@ namespace FactorySimulation
 		private HttpBroker _broker;
 		public void StartSimulation()
 		{
-			Console.WriteLine("Simliato startet");
+			Console.WriteLine("Simulation starts");
 			CreateFactory();
 
 			date = DateTime.Now;
