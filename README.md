@@ -19,5 +19,5 @@ Software is currently in development but will be build up as followed:
 
 ## Factory Simulation:  
  - written in C# and Java  
- - sends every seconds a HTTP Request to the backend with machinedata  
+ - sends every second a HTTP Request to the backend with machinedata  
  - is a good option as long as you do not have your own factory  
