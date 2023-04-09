@@ -33,7 +33,7 @@ public class MachineHour {
     private List<Integer> workedOn;
 
     private float power;
-    private float powerIdle;
+    private float powerLow;
     private float powerPeak;
 
     private int workingTime;//in ms
@@ -50,17 +50,20 @@ public class MachineHour {
     private TreeMap<TimeRange, MachineStatus> timeLine;
 
     private long[] timeRange;
-    private int[] machineStatus;
+    private int[] machineStates;
 
 
     public MachineHour(List<MachineTenMinutes> tenMinutesMachines){
         this.machineTenList = new ArrayList<MachineTenMinutes>();
-       // processTenMinutes();
+        processTenMinutes();
 
 
     }
     private void processTenMinutes(){
         Collections.sort(machineTenList);
+
+        init();
+        this.startTime = machineTenList.get(0).getStartTime();
 
         for(int i =0; i<machineTenList.size();i++){
 
@@ -76,14 +79,14 @@ public class MachineHour {
             this.actualTime += machineTen.getActualTime();
             if(i==0){
                 this.power = machineTen.getPower();
-                this.powerIdle = machineTen.getIdlePower();
+                this.powerLow = machineTen.getIdlePower();
                 this.powerPeak = machineTen.getPowerPeak();
             }else{
                 if(this.powerPeak < machineTen.getPowerPeak()){
                     this.powerPeak = machineTen.getPowerPeak();
                 }
-                if(this.powerIdle >machineTen.getIdlePower()){
-                    this.powerIdle = machineTen.getIdlePower();
+                if(this.powerLow >machineTen.getPowerLow()){
+                    this.powerLow = machineTen.getPowerLow();
                 }
             }
 
@@ -93,7 +96,7 @@ public class MachineHour {
         this.timePerPart =(int) (workedOn.size()/actualTime);
 
 
-
+            setTimeLineAsArrays();
 
     }
 
@@ -119,13 +122,35 @@ public class MachineHour {
     }
 
     public TreeMap<TimeRange, MachineStatus> getTimeLine(){
+        if(timeLine ==null)
+        return getTimeRangeMachineStatusTreeMap(timeRange, machineStates);
+        else return timeLine;
 
-        return getTimeRangeMachineStatusTreeMap(timeRange, machineStatus);
+    }
 
+    private void setTimeLineAsArrays(){
+        this.timeRange = new long[timeLine.size()];
+        this.machineStates= new int[timeRange.length];
+        int index =0;
+        for(Map.Entry<TimeRange,MachineStatus> entry : timeLine.entrySet()){
+            timeRange[index] =entry.getKey().getStartTime();
+            timeRange[index+1] =entry.getKey().getEndTime();
+            machineStates[index] = entry.getValue().getStateCode();
+            machineStates[index+1] = entry.getValue().getWorkOn();
+            index++;
+            index++;
+        }
 
     }
 
 
+    private void init (){
+        errorTime=0;
+        idleTime =0;
+        workingTime=0;
+        actualTime =0;
+        timeLine = new TreeMap<>();
+    }
 
 
 }
