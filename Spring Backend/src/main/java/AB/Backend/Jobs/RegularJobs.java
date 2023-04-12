@@ -144,6 +144,21 @@ public class RegularJobs {
     public void dailyJob(){
         System.out.println("DAILY JoB");
 
+        Date date = new Date(System.currentTimeMillis());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+
+        long startTime;
+        long endTime = System.currentTimeMillis();
+
+        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),
+                0,0);
+
+        startTime = calendar.getTimeInMillis();
+
+        processDailyJob(startTime,endTime);
+
     }
 
 
@@ -216,6 +231,26 @@ public class RegularJobs {
     }
 
 
+
+    private void processDailyJob(long startTime, long endTime){
+            List<MachineHour> hourlyList =hourRepo.findAllByStartTimeBetween(startTime-1000l,endTime);
+
+            while(hourlyList.size() >0){
+                int id = hourlyList.get(0).getMachineId();
+                List<MachineHour> machineHours = new ArrayList<>();
+
+                for(int i =0; i<hourlyList.size();i++){
+                    if(hourlyList.get(i).getMachineId() ==id){
+                        machineHours.add(hourlyList.get(i));
+                    }
+                }
+                MachineDaily machineDaily = new MachineDaily(machineHours);
+
+
+            }
+
+
+    }
     private long unixFromDate(Date d){
 
         return d.getTime();

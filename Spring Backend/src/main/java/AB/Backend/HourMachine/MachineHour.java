@@ -97,6 +97,7 @@ public class MachineHour {
 
 
             setTimeLineAsArrays();
+            dissolveDuplicates();
 
     }
 
@@ -152,5 +153,45 @@ public class MachineHour {
         timeLine = new TreeMap<>();
     }
 
+    private void dissolveDuplicates() {
+        //dissolve duplicates in Timeline
+        int lastState = 0;
+        for (int i = 0; i < timeRange.length; i++) {
+            lastState = machineStates[i];
+            if (i == 0) {
+                continue;
+            } else if (machineStates[i - 2] == lastState) {
+                //found duplicate
+                // short arrays
+                //
+                long[] rangeNew = new long[timeRange.length - 2];
+                int[] statesNew = new int[timeRange.length - 2];
+                for (int j = 0; j < timeRange.length; j++) {
 
+
+                    if (j == i) {
+                        rangeNew[j - 1] = timeRange[j + 1];
+                        statesNew[j - 1] = machineStates[j + 1];
+                         j++;
+                    } else {
+                        rangeNew[j] = timeRange[j];
+                        statesNew[j] = machineStates[j];
+
+
+                    }
+
+
+
+                }
+
+
+           timeRange = rangeNew;
+                machineStates = statesNew;
+
+            }
+            i++;
+
+        }
+
+    }
 }

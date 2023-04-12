@@ -1,6 +1,7 @@
 package AB.Backend.HourMachine;
 
 import AB.Backend.FactoryStructure.Machine;
+import AB.Backend.TenMinutesMachine.MachineTenMinutes;
 import org.springframework.data.couchbase.repository.CouchbaseRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +11,11 @@ import java.util.List;
 public interface MachineHourRepo extends CouchbaseRepository<MachineHour,Integer> {
 
     List<MachineHour> findAllByIdAndsAndStartTimeBetween(int id,long startTime, long endTime);
+
+
+
+    List<MachineHour> findAllByStartTimeBetween(long starTime, long endTime);
+
+
 
 }

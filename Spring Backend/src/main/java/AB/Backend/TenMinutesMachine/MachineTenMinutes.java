@@ -97,20 +97,21 @@ public MachineTenMinutes(int id, long startTime){
             int currentState=0;
             int currentWorkOn=-1;
             long startTime=0;
-            int powerCounter=0;
+            int stateCounter=0;
 
             for(int i =0;i<ms.size();i++){
                 MachineState machine = ms.get(i);
                 addPower(machine.getPower());
                 addWorkedOn(machine.getWorkingOn());
                 addState(machine.getStateCode());
-                powerCounter++; // counts seconds=states
+                stateCounter++; // counts seconds=states
                 if(i>0){
 
                     if(currentState !=machine.getStateCode() || i ==ms.size()){
-                        timeLine.put(new TimeRange(startTime,(long)machine.getTimestamp()),new MachineStatus(currentState,currentWorkOn));
+                        // if statecode change -> update timeline
+                        timeLine.put(new TimeRange(startTime,machine.getTimestamp()),new MachineStatus(currentState,currentWorkOn));
                         currentState =machine.getStateCode();
-                        startTime=(long)machine.getTimestamp();
+                        startTime=machine.getTimestamp();
                         currentWorkOn = machine.getWorkingOn();
                     }
 
@@ -158,9 +159,9 @@ public MachineTenMinutes(int id, long startTime){
             }
 
 
-        this.power = this.power /(float)powerCounter;
-        this.idlePower = this.idlePower/(this.idleTime*1000f);
-        this.workingPower = this.workingPower/(this.workingTime*1000f);
+        this.power = this.power /(float)stateCounter;
+        this.idlePower = this.idlePower/(this.idleTime/1000f);
+        this.workingPower = this.workingPower/(this.workingTime/1000f);
 
         this.setTimeLineAsArrays();
 
