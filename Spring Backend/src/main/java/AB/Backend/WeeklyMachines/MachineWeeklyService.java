@@ -18,21 +18,16 @@ public class MachineWeeklyService {
         this.machineWeeklyRepo =machineWeeklyRepo;
     }
 
-
     public List<MachineWeekly> getAllById(int id){
         return machineWeeklyRepo.findAllById(id);
     }
 
-
     public List<MachineWeekly> getAllByIdBetweem(int id,long start, long end){
-
             return machineWeeklyRepo.findAllByIdAndTimeStampBetween(id,start,end);
-
     }
 
     public List<MachineWeekly> getLast7(int id){
     return  machineWeeklyRepo.findTop7ByIdAndOrderByTimeStampDesc(id);
-
     }
 }
 

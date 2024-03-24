@@ -25,5 +25,4 @@ public class MachineStatus {
         this.stateCode =stateCode;
         workOn =-1;
     }
-
 }

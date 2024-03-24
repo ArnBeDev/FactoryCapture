@@ -17,7 +17,6 @@ public class PartRecentRepo {
     List<MachineState> recentMachines;
     TreeMap<Integer, ProductCycle> inProduction;
 
-
     public PartRecentRepo(){
         inProduction = new TreeMap<Integer, ProductCycle>();
         recentParts = new ArrayList<Part>();
@@ -26,7 +25,6 @@ public class PartRecentRepo {
     public List<Part> getRecentParts(){
         return recentParts;
     }
-
 
     public TreeMap<Integer,ProductCycle> getInProduction(){
         return inProduction;

@@ -9,18 +9,9 @@ import org.springframework.data.couchbase.core.mapping.Document;
 @Getter
 @Setter
 public class MachineWeekly {
-
-
+    
     @Id
     private int id;
     private int machineId;
-
-
     private long timeStamp;
-
-
-
-
-
-
 }

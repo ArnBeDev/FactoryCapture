@@ -15,17 +15,11 @@ public class MachineTenMinService {
         this.machineTenMinuteRepo = machineTenMinuteRepo;
     }
 
-
     public void testSaveTenMinutes(MachineTenMinutes mt){
         machineTenMinuteRepo.save(mt);
     }
 
-
-
     public List<MachineTenMinutes> getMachineTenMinutesByTimeRange(long startTime, long endTime){
        return machineTenMinuteRepo.findAllByStartTimeBetween(startTime,endTime);
     }
-
-
-
 }
