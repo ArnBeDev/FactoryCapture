@@ -19,21 +19,16 @@ public class MachineHourlyController {
 
     private final MachineHourService machineHourService;
 
-
     @Autowired
-    public MachineHourlyController(MachineHourService machineHourService){
+    public MachineHourlyController(MachineHourService machineHourService) {
         this.machineHourService = machineHourService;
     }
 
-
-    @GetMapping(path="/between")
-    public List<MachineHour> getBetween(@RequestBody Map<String,String> body){
+    @GetMapping(path = "/between")
+    public List<MachineHour> getBetween(@RequestBody Map<String, String> body) {
         int id = Integer.parseInt(body.get("id"));
-        long startTime =Long.parseLong( body.get("start"));
+        long startTime = Long.parseLong(body.get("start"));
         long endTime = Long.parseLong(body.get("end"));
-
-
-
-        return machineHourService.getBetween(id,startTime,endTime);
+        return machineHourService.getBetween(id, startTime, endTime);
     }
 }

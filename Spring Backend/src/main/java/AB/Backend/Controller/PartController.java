@@ -10,23 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(path="/api/parts")
+@RequestMapping(path = "/api/parts")
 public class PartController {
 
-
     private final PartService partService;
-    public PartController(PartService partService){
+
+    public PartController(PartService partService) {
         this.partService = partService;
     }
 
+    @GetMapping
 
-  @GetMapping
-
-    public List<Part> recentlyProduced(){
+    public List<Part> recentlyProduced() {
         return partService.getRecentlyProducedParts();
     }
-
-
 }

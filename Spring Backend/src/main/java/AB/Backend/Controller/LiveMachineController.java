@@ -7,35 +7,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin(origins="*")
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/live")
 public class LiveMachineController {
 
     private final MachineStateService machineStateService;
+
     @Autowired
-    public LiveMachineController(MachineStateService machineStateService){
+    public LiveMachineController(MachineStateService machineStateService) {
         this.machineStateService = machineStateService;
     }
 
-
-
-
-    @GetMapping(path ="/")
-    public List<LiveMachine> getLiveData(@RequestParam(required = false) String id){
-        if(id ==null){
+    @GetMapping(path = "/")
+    public List<LiveMachine> getLiveData(@RequestParam(required = false) String id) {
+        if (id == null) {
             return machineStateService.getLiveData();
-        }else {
-            try{
+        } else {
+            try {
                 int i = Integer.parseInt(id);
                 return machineStateService.getLiveDataById(i);
-            }catch(Exception e){
+            } catch (Exception e) {
                 return machineStateService.getLiveData();
             }
         }
     }
-
-
 }
 
 

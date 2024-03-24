@@ -26,7 +26,7 @@ public class Config extends AbstractCouchbaseConfiguration {
     private String hourMachineBucket = "hourlyBucket";
     private String tenMinuteBucket = "tenMinuteBucket";
     private String partBucket = "partBucket";
-    private String dailyMachineBucket ="dailyBucket";
+    private String dailyMachineBucket = "dailyBucket";
 
     @Autowired
     private ApplicationContext context;
@@ -70,7 +70,6 @@ public class Config extends AbstractCouchbaseConfiguration {
                     (MappingCouchbaseConverter) (baseMapping.getDefault().getConverter()));
             baseMapping.mapEntity(Part.class, partTemplate);
 
-
             // everything else goes in getBucketName()
         } catch (Exception e) {
             throw e;
@@ -84,7 +83,6 @@ public class Config extends AbstractCouchbaseConfiguration {
                     (MappingCouchbaseConverter) (baseMapping.getDefault().getConverter()));
 
             baseMapping.mapEntity(MachineDaily.class, dailyTemplate);
-
 
 
             CouchbaseTemplate hourlyTemplate = myCouchbaseTemplate(myCouchbaseClientFactory(hourMachineBucket),
@@ -106,26 +104,30 @@ public class Config extends AbstractCouchbaseConfiguration {
         }
     }
 
-
-
-    // do not use reactiveCouchbaseTemplate for the name of this method, otherwise the value of that bean
-// will be used instead of the result of this call (the client factory arg is different)
+    /*
+     *do not use reactiveCouchbaseTemplate for the name of this method, otherwise the value of that bean
+     *will be used instead of the result of this call (the client factory arg is different)
+     */
     public ReactiveCouchbaseTemplate myReactiveCouchbaseTemplate(CouchbaseClientFactory couchbaseClientFactory,
                                                                  MappingCouchbaseConverter mappingCouchbaseConverter) {
         return new ReactiveCouchbaseTemplate(couchbaseClientFactory, mappingCouchbaseConverter,
                 new JacksonTranslationService(), getDefaultConsistency());
     }
 
-    // do not use couchbaseTemplate for the name of this method, otherwise the value of that been
-// will be used instead of the result from this call (the client factory arg is different)
+    /*
+     * do not use couchbaseTemplate for the name of this method, otherwise the value of that been
+     * will be used instead of the result from this call (the client factory arg is different)
+     */
     public CouchbaseTemplate myCouchbaseTemplate(CouchbaseClientFactory couchbaseClientFactory,
                                                  MappingCouchbaseConverter mappingCouchbaseConverter) {
         return new CouchbaseTemplate(couchbaseClientFactory, mappingCouchbaseConverter, new JacksonTranslationService(),
                 getDefaultConsistency());
     }
 
-    // do not use couchbaseClientFactory for the name of this method, otherwise the value of that bean will
-// will be used instead of this call being made ( bucketname is an arg here, instead of using bucketName() )
+    /*
+     * do not use couchbaseClientFactory for the name of this method, otherwise the value of that bean will
+     * will be used instead of this call being made ( bucketname is an arg here, instead of using bucketName() )
+     */
     public CouchbaseClientFactory myCouchbaseClientFactory(String bucketName) {
         return new SimpleCouchbaseClientFactory(getConnectionString(), authenticator(), bucketName);
     }

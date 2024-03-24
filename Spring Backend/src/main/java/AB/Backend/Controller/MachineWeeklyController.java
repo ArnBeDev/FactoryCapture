@@ -17,29 +17,27 @@ public class MachineWeeklyController {
     private final MachineWeeklyService weeklyService;
 
     @Autowired
-    public MachineWeeklyController(MachineWeeklyService weeklyService){
-        this.weeklyService =weeklyService;
+    public MachineWeeklyController(MachineWeeklyService weeklyService) {
+        this.weeklyService = weeklyService;
     }
 
-
-    @GetMapping(path="/{id})")
-    public List<MachineWeekly> getAllStates(@PathVariable int id){
-            return weeklyService.getAllById(id);
+    @GetMapping(path = "/{id})")
+    public List<MachineWeekly> getAllStates(@PathVariable int id) {
+        return weeklyService.getAllById(id);
     }
 
-
-    @GetMapping(path ="/between")
-    public List<MachineWeekly> getAllBetween(@RequestBody Map<String,String> body){
+    @GetMapping(path = "/between")
+    public List<MachineWeekly> getAllBetween(@RequestBody Map<String, String> body) {
         int id = Integer.parseInt(body.get("id"));
         long startTime = Long.parseLong(body.get("starttime"));
-        long endTime= Long.parseLong(body.get("endtime"));
+        long endTime = Long.parseLong(body.get("endtime"));
 
 
-        return weeklyService.getAllByIdBetweem(id,startTime,endTime);
+        return weeklyService.getAllByIdBetweem(id, startTime, endTime);
     }
 
-    @GetMapping(path="/{id}/last")
-    public List<MachineWeekly> getLast7(@PathVariable int id){
+    @GetMapping(path = "/{id}/last")
+    public List<MachineWeekly> getLast7(@PathVariable int id) {
         return weeklyService.getLast7(id);
     }
 }

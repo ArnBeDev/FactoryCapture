@@ -58,7 +58,6 @@ public class MachineDaily {
 
     }
 
-
         private void processHourMachines(List<MachineHour> machineHourList){
 
 

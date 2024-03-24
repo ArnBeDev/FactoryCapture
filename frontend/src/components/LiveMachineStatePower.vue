@@ -123,7 +123,7 @@ export default {
 
     async receiveData() {
       setInterval(() => {
-        axios.get('http://192.168.2.102:8080/api/live/').then((response) => { this.machines = response.data; this.createChartData(); }).catch(err => { this.err = err })
+        axios.get('http://127.0.0.1:8080/api/live/').then((response) => { this.machines = response.data; this.createChartData(); }).catch(err => { this.err = err })
       }, 6000);
 
 
