@@ -10,7 +10,7 @@ import java.util.List;
 public interface MachineTenMinuteRepo extends CouchbaseRepository<MachineTenMinutes,Long> {
 
 
-List<MachineTenMinutes> findAllByStartTimeBetween(long starTime, long endTime);
+List<MachineTenMinutes> findAllByStartTimeBetween(long startTime, long endTime);
 
 
 }

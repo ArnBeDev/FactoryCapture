@@ -13,10 +13,7 @@ import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 import static AB.Backend.FactoryStructure.Machine.getTimeRangeMachineStatusTreeMap;
 
@@ -31,7 +28,7 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
     @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
     private String id;
     private int machineId;
-    private double startTime;
+    private long startTime;
     private float power;
     private int workingTime;
     private float workingPower;
@@ -43,7 +40,10 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
     private float powerLow;
 
     private double actualTime;
+    @Transient
     private List<Byte> stateCodes;
+
+    @Transient
     private List<Integer> workedOn;
 
 
@@ -51,8 +51,9 @@ public class MachineTenMinutes implements Comparable<MachineTenMinutes>{
     @Transient
     private TreeMap<TimeRange, MachineStatus> timeLine;
 
-    private long[] timeRange;
-    private int[] machineStatus;
+    // timeLine as Arrays for better database integration
+    private long[] timeRange;// [i] = startTime,  [i+1] =endTime
+    private int[] machineStates; // [i] = stateCode,  [i+1] =workOn
 
     private void addState(byte state) {
         if (stateCodes.contains(state)) {
@@ -96,20 +97,21 @@ public MachineTenMinutes(int id, long startTime){
             int currentState=0;
             int currentWorkOn=-1;
             long startTime=0;
-            int powerCounter=0;
+            int stateCounter=0;
 
             for(int i =0;i<ms.size();i++){
                 MachineState machine = ms.get(i);
                 addPower(machine.getPower());
                 addWorkedOn(machine.getWorkingOn());
                 addState(machine.getStateCode());
-                powerCounter++;
+                stateCounter++; // counts seconds=states
                 if(i>0){
 
                     if(currentState !=machine.getStateCode() || i ==ms.size()){
-                        timeLine.put(new TimeRange(startTime,(long)machine.getTimestamp()),new MachineStatus(currentState,currentWorkOn));
+                        // if statecode change -> update timeline
+                        timeLine.put(new TimeRange(startTime,machine.getTimestamp()),new MachineStatus(currentState,currentWorkOn));
                         currentState =machine.getStateCode();
-                        startTime=(long)machine.getTimestamp();
+                        startTime=machine.getTimestamp();
                         currentWorkOn = machine.getWorkingOn();
                     }
 
@@ -156,16 +158,17 @@ public MachineTenMinutes(int id, long startTime){
 
             }
 
-        this.power = this.power /(float)actualTime;
-        this.idlePower = this.idlePower/this.idleTime;
-        this.workingPower = this.workingPower/this.workingTime;
 
+        this.power = this.power /(float)stateCounter;
+        this.idlePower = this.idlePower/(this.idleTime/1000f);
+        this.workingPower = this.workingPower/(this.workingTime/1000f);
 
+        this.setTimeLineAsArrays();
 
         }
 
 
-    public MachineTenMinutes(int machineId, double startTime, float power, int workingTime, int idleTime, int errorTime, List<Byte> stateCodes, List<Integer> workedOn) {
+    public MachineTenMinutes(int machineId, long startTime, float power, int workingTime, int idleTime, int errorTime, List<Byte> stateCodes, List<Integer> workedOn) {
         this.machineId = machineId;
         this.startTime = startTime;
         this.power = power;
@@ -208,10 +211,28 @@ public MachineTenMinutes(int id, long startTime){
 
     public TreeMap<TimeRange, MachineStatus> getTimeLine(){
 
-        return getTimeRangeMachineStatusTreeMap(timeRange, machineStatus);
+        return getTimeRangeMachineStatusTreeMap(timeRange, machineStates);
 
 
     }
+
+    private void setTimeLineAsArrays(){
+        this.timeRange = new long[timeLine.size()];
+        this.machineStates= new int[timeRange.length];
+        int index =0;
+        for(Map.Entry<TimeRange,MachineStatus> entry : timeLine.entrySet()){
+         timeRange[index] =entry.getKey().getStartTime();
+            timeRange[index+1] =entry.getKey().getEndTime();
+            machineStates[index] = entry.getValue().getStateCode();
+            machineStates[index+1] = entry.getValue().getWorkOn();
+            index++;
+            index++;
+        }
+
+    }
+
+
+
 
 
 

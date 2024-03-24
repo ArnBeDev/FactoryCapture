@@ -1,5 +1,6 @@
 package AB.Backend.DailyMachines;
 
+import AB.Backend.FactoryStructure.Machine;
 import AB.Backend.HourMachine.MachineHour;
 import AB.Backend.Models.MachineStatus;
 import AB.Backend.Models.TimeRange;
@@ -25,7 +26,7 @@ public class MachineDaily {
 
     private int machineId;
     private float powerAVG;
-    private float powerIdle;
+    private float powerLow;
     private float powerPeak;
 
     private List<Integer> workedOn;
@@ -44,12 +45,12 @@ public class MachineDaily {
     private TreeMap<TimeRange, MachineStatus> timeLine;
 
     private long[] timeRanges;
-    private int[] machineStatus;
+    private int[] machineStates;
 
 
 
     public MachineDaily(List<MachineHour> machineHourList){
-        //processHourMachines(machineHourList);
+        processHourMachines(machineHourList);
 
 
     }
@@ -77,8 +78,15 @@ public class MachineDaily {
 
                 if(i==0){
                     this.powerPeak = machineHour.getPowerPeak();
-                    this.powerIdle = machineHour.getPowerIdle();
+                    this.powerLow = machineHour.getPowerLow();
                 }else{
+                    if(this.powerPeak < machineHour.getPowerPeak()){
+                        this.powerPeak =machineHour.getPowerPeak();
+                    }
+                    if(this.powerLow>machineHour.getPowerLow()){
+                        this.powerLow = machineHour.getPowerLow();
+                    }
+
 
                 }
 
@@ -112,4 +120,20 @@ public class MachineDaily {
         // find overlapping
         }
 
+
+        public TreeMap<TimeRange,MachineStatus> getTimeLine(){
+            if(timeLine ==null){
+                return Machine.getTimeRangeMachineStatusTreeMap(this.timeRanges,this.machineStates);
+            }
+            return timeLine;
+        }
+
+
+        private void init(){
+                this.timeLine = new TreeMap<>();
+                this.idleTime=0;
+                this.workingTime=0;
+                this.errorTime =0;
+                this.actualTime =0;
+        }
 }
