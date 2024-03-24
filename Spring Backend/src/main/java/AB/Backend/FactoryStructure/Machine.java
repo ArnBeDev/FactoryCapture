@@ -47,18 +47,13 @@ public class Machine {
         TimeRange tr;
         MachineStatus ms;
 
-
         for(int i = 0; i< timeRange.length; i++){
             if(i%2==1){
                 tr = new TimeRange(timeRange[i-1], timeRange[i]);
                 ms = new MachineStatus(machineStatus[i-1], machineStatus[i]);
                 tLine.put(tr,ms);
-
             }
-
         }
-
         return tLine;
     }
-
 }

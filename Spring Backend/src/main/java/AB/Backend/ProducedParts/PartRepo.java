@@ -8,11 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PartRepo extends CouchbaseRepository<Part,Integer> {
+public interface PartRepo extends CouchbaseRepository<Part, Integer> {
     @Override
     Optional<Part> findById(Integer integer);
 
-
-    List<Part> findAllByProductionEndBetween(long startTime,long endTime);
-
+    List<Part> findAllByProductionEndBetween(long startTime, long endTime);
 }

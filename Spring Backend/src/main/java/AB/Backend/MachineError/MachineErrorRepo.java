@@ -15,11 +15,9 @@ public interface MachineErrorRepo extends CrudRepository<MachineError, String> {
     @Override
     Optional<MachineError> findById(String s);
 
-    List<MachineError> findAllByMachineIdAndStartTimeBetween(int machineId,long startTime, long endTime);
-
+    List<MachineError> findAllByMachineIdAndStartTimeBetween(int machineId, long startTime, long endTime);
 
     List<MachineError> findAllByMachineId(int machineId);
 
     List<MachineError> findTop10ByMachineIdOrderByStartTime(int machineId);
-
 }

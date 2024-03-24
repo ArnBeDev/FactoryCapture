@@ -1,12 +1,14 @@
 package AB.Backend.Models;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class TimeRange implements Comparable<TimeRange> {
 
     long startTime;
@@ -16,14 +18,6 @@ public class TimeRange implements Comparable<TimeRange> {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
-
-
-    public TimeRange(){
-
-    }
-
-
     @Override
     public int compareTo(TimeRange o) {
         if (this.startTime < o.getStartTime()) {
@@ -31,7 +25,6 @@ public class TimeRange implements Comparable<TimeRange> {
         } else if (this.startTime > o.getStartTime()) {
             return 1;
         }
-
 
         return 0;
     }

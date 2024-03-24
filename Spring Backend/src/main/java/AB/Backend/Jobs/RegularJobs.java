@@ -33,25 +33,19 @@ public class RegularJobs {
 
     @Autowired
     public RegularJobs(MachineStateRepository stateRepo, MachineTenMinuteRepo tenMinuteRepo,
-                       MachineHourRepo hourRepo, MachineDailyRepo dailyRepo)
-    {
+                       MachineHourRepo hourRepo, MachineDailyRepo dailyRepo) {
         this.stateRepo = stateRepo;
         this.tenMinuteRepo = tenMinuteRepo;
         this.hourRepo = hourRepo;
         this.dailyRepo = dailyRepo;
-
     }
 
-
-    //EVERY 10 min , e.g: 22:30:30
+    // EVERY 10 min , e.g: 22:30:30
     // only between 6 and 23 o clock
-
-    @Scheduled(cron ="15 */10 6-23 * * ?")
-    public void tenMinuteJob(){
-        long startTime =0;
-        long endTime =0;
-
-
+    @Scheduled(cron = "15 */10 6-23 * * ?")
+    public void tenMinuteJob() {
+        long startTime = 0;
+        long endTime = 0;
 
 
         Date date = new Date(System.currentTimeMillis());
@@ -61,48 +55,41 @@ public class RegularJobs {
 
         int endMinute = calendar.get(Calendar.MINUTE);
         int startMinute;
-        if(endMinute == 0){
-            startMinute =50;
-            calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY)-1,startMinute,0);
+        if (endMinute == 0) {
+            startMinute = 50;
+            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY) - 1, startMinute, 0);
 
-        }else{
-            startMinute = endMinute-10;
-            calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),startMinute,0);
+        } else {
+            startMinute = endMinute - 10;
+            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY), startMinute, 0);
 
         }
 
-        System.out.println("starTime min:"+ calendar.get(Calendar.MINUTE) +" sek:"+calendar.get(Calendar.SECOND));
+        System.out.println("starTime min:" + calendar.get(Calendar.MINUTE) + " sek:" + calendar.get(Calendar.SECOND));
 
-        startTime =calendar.getTimeInMillis();
+        startTime = calendar.getTimeInMillis();
 
-        System.out.println("Calendar Year:" +calendar.YEAR);
-        System.out.println("startTime after get milis"+ startTime);
-                calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),endMinute-1,59);
-        System.out.println("endTime:min: " +calendar.get(Calendar.MINUTE)  +" sec:"+calendar.get(Calendar.SECOND));
-        System.out.println("startTime after set"+ startTime);
+        System.out.println("Calendar Year:" + calendar.YEAR);
+        System.out.println("startTime after get milis" + startTime);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY), endMinute - 1, 59);
+        System.out.println("endTime:min: " + calendar.get(Calendar.MINUTE) + " sec:" + calendar.get(Calendar.SECOND));
+        System.out.println("startTime after set" + startTime);
 
 
-
-        endTime =calendar.getTimeInMillis();
-        processTenMinuteJob(startTime,endTime);
+        endTime = calendar.getTimeInMillis();
+        processTenMinuteJob(startTime, endTime);
 
         // Delete older states
 
-        System.out.println("TEN MINUTE JOB +"+ startTime  +" ende:" +endTime +"   dif -" +(endTime-startTime));
-
-
-
-
+        System.out.println("TEN MINUTE JOB +" + startTime + " ende:" + endTime + "   dif -" + (endTime - startTime));
     }
 
-    @Scheduled(cron =" 45 0 * * * ?")
-    public void hourlyJob(){
+    @Scheduled(cron = " 45 0 * * * ?")
+    public void hourlyJob() {
         System.out.println("HOURLY JOB");
 
-        long startTime =0;
-        long endTime =0;
-
-
+        long startTime = 0;
+        long endTime = 0;
 
 
         Date date = new Date(System.currentTimeMillis());
@@ -111,37 +98,34 @@ public class RegularJobs {
 
 
         int endMinute = 59;
-        int startMinute =0;
+        int startMinute = 0;
 
-            calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY)-1,
-                    startMinute,0);
-
-
-
-        System.out.println("starTime min:"+ calendar.get(Calendar.MINUTE) +" sek:"+calendar.get(Calendar.SECOND));
-
-        startTime =calendar.getTimeInMillis();
-
-        System.out.println("Calendar Year:" +calendar.YEAR);
-        System.out.println("startTime after get milis"+ startTime);
-        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),
-                endMinute-1,59);
-        System.out.println("endTime:min: " +calendar.get(Calendar.MINUTE)  +" sec:"+calendar.get(Calendar.SECOND));
-        System.out.println("startTime after set"+ startTime);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY) - 1,
+                startMinute, 0);
 
 
+        System.out.println("starTime min:" + calendar.get(Calendar.MINUTE) + " sek:" + calendar.get(Calendar.SECOND));
 
-        endTime =calendar.getTimeInMillis();
-        processHourlyJob(startTime,endTime);
+        startTime = calendar.getTimeInMillis();
 
+        System.out.println("Calendar Year:" + calendar.YEAR);
+        System.out.println("startTime after get milis" + startTime);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY),
+                endMinute - 1, 59);
+        System.out.println("endTime:min: " + calendar.get(Calendar.MINUTE) + " sec:" + calendar.get(Calendar.SECOND));
+        System.out.println("startTime after set" + startTime);
+
+
+        endTime = calendar.getTimeInMillis();
+        processHourlyJob(startTime, endTime);
 
     }
 
     //um 00:01
     @Scheduled(cron = "0 1 0 * * *")
-    public void dailyJob(){
+    public void dailyJob() {
         System.out.println("DAILY JoB");
 
         Date date = new Date(System.currentTimeMillis());
@@ -151,112 +135,81 @@ public class RegularJobs {
         long startTime;
         long endTime = System.currentTimeMillis();
 
-        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DATE),calendar.get(Calendar.HOUR_OF_DAY),
-                0,0);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY),
+                0, 0);
 
         startTime = calendar.getTimeInMillis();
 
-        processDailyJob(startTime,endTime);
-
+        processDailyJob(startTime, endTime);
     }
 
 
-    private void processTenMinuteJob(long startTime, long endTime){
-        List<MachineState> machineStatesList=  stateRepo.findAllByTimestampBetween(startTime,endTime);
-        System.out.println("Size of found states: " +machineStatesList.size());
+    private void processTenMinuteJob(long startTime, long endTime) {
+        List<MachineState> machineStatesList = stateRepo.findAllByTimestampBetween(startTime, endTime);
+        System.out.println("Size of found states: " + machineStatesList.size());
 
+        while (machineStatesList.size() > 0) {
 
+            int id = machineStatesList.get(0).getMachineId();
 
-            while(machineStatesList.size()>0){
+            MachineTenMinutes machineTenMinutes = new MachineTenMinutes(id, startTime);
+            List<MachineState> machineStates = new ArrayList<>();
 
-                int id = machineStatesList.get(0).getMachineId();
+            for (int j = 0; j < machineStatesList.size(); j++) {
+                if (machineStatesList.get(j).getMachineId() == id) {
 
-                MachineTenMinutes machineTenMinutes= new MachineTenMinutes(id,startTime);
-                List<MachineState> machineStates = new ArrayList<>();
+                    machineStates.add(machineStatesList.get(j));
 
-                for(int j = 0;j<machineStatesList.size();j++){
-                    if(machineStatesList.get(j).getMachineId() == id){
-
-                        machineStates.add(machineStatesList.get(j));
-
-                        machineStatesList.remove(j);
-                        j--;
-
-                    }
-
-                        machineTenMinutes.addMachineStates(machineStates);
-
-
-                    tenMinuteRepo.save(machineTenMinutes);
+                    machineStatesList.remove(j);
+                    j--;
 
                 }
-
-
-
-
+                machineTenMinutes.addMachineStates(machineStates);
+                tenMinuteRepo.save(machineTenMinutes);
             }
-
-
-
-
-
-
+        }
     }
 
-    private void processHourlyJob(long starTime,long endTime){
-            List<MachineTenMinutes> allMachineTenMinutes = tenMinuteRepo.findAllByStartTimeBetween(starTime,endTime);
+    private void processHourlyJob(long starTime, long endTime) {
+        List<MachineTenMinutes> allMachineTenMinutes = tenMinuteRepo.findAllByStartTimeBetween(starTime, endTime);
 
 
-            while(allMachineTenMinutes.size()>0){
-                int id = allMachineTenMinutes.get(0).getMachineId();
-                List<MachineTenMinutes> tenMinutesList = new ArrayList<MachineTenMinutes>();
+        while (allMachineTenMinutes.size() > 0) {
+            int id = allMachineTenMinutes.get(0).getMachineId();
+            List<MachineTenMinutes> tenMinutesList = new ArrayList<MachineTenMinutes>();
 
 
-                for(int i =0; i<allMachineTenMinutes.size();i++){
-                    if(allMachineTenMinutes.get(i).getMachineId() ==id){
-                        tenMinutesList.add(allMachineTenMinutes.get(i));
-                        allMachineTenMinutes.remove(i);
-                        i--;
-                    }
-
-
-
+            for (int i = 0; i < allMachineTenMinutes.size(); i++) {
+                if (allMachineTenMinutes.get(i).getMachineId() == id) {
+                    tenMinutesList.add(allMachineTenMinutes.get(i));
+                    allMachineTenMinutes.remove(i);
+                    i--;
                 }
-                MachineHour machineHour = new MachineHour(tenMinutesList);
-                hourRepo.save(machineHour);
-
             }
-
+            MachineHour machineHour = new MachineHour(tenMinutesList);
+            hourRepo.save(machineHour);
+        }
     }
 
+    private void processDailyJob(long startTime, long endTime) {
+        List<MachineHour> hourlyList = hourRepo.findAllByStartTimeBetween(startTime - 1000l, endTime);
 
+        while (hourlyList.size() > 0) {
+            int id = hourlyList.get(0).getMachineId();
+            List<MachineHour> machineHours = new ArrayList<>();
 
-    private void processDailyJob(long startTime, long endTime){
-            List<MachineHour> hourlyList =hourRepo.findAllByStartTimeBetween(startTime-1000l,endTime);
-
-            while(hourlyList.size() >0){
-                int id = hourlyList.get(0).getMachineId();
-                List<MachineHour> machineHours = new ArrayList<>();
-
-                for(int i =0; i<hourlyList.size();i++){
-                    if(hourlyList.get(i).getMachineId() ==id){
-                        machineHours.add(hourlyList.get(i));
-                    }
+            for (int i = 0; i < hourlyList.size(); i++) {
+                if (hourlyList.get(i).getMachineId() == id) {
+                    machineHours.add(hourlyList.get(i));
                 }
-                MachineDaily machineDaily = new MachineDaily(machineHours);
-
-
             }
-
-
+            MachineDaily machineDaily = new MachineDaily(machineHours);
+        }
     }
-    private long unixFromDate(Date d){
+
+    private long unixFromDate(Date d) {
 
         return d.getTime();
     }
-
-
-
-
 }

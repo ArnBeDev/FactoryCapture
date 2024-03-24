@@ -8,6 +8,4 @@ import java.util.List;
 public class FactoryLine {
 
     public List<FactoryPart> parts;
-
-
 }

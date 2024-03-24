@@ -9,11 +9,6 @@ public class Unit {
 
     private List<Machine> consist;
     private List<Integer> has;
-
     private Unit nextUnit;
     private FactoryPart next;
-
-
-
-
 }

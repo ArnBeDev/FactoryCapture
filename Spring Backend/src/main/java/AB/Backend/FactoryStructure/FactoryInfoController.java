@@ -15,7 +15,4 @@ import java.util.List;
 @RequestMapping(path ="api/factory/")
 public class FactoryInfoController {
 
-
-
-
 }

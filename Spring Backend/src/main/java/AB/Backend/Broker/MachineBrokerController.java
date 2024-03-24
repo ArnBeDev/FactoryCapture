@@ -57,28 +57,11 @@ public class MachineBrokerController
         System.out.println("PUT RECEIVED");
       //  machineStateService.addMachineState(id,2d,3f,(byte)4,5);
         machineStateService.addMachineState(id,t,p,s,w);
-
-
-
     }
 
     @PutMapping
     public void receiveStates(@RequestBody List<MachineState> machineStateList){
-
-
         machineStateService.addMachineStates(machineStateList);
-
-
         partService.passNewMachineStates(machineStateList);
-
-
-
-
-
-
     }
-
-
-
-
 }

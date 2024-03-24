@@ -22,7 +22,6 @@ public class PartController {
     }
 
     @GetMapping
-
     public List<Part> recentlyProduced() {
         return partService.getRecentlyProducedParts();
     }

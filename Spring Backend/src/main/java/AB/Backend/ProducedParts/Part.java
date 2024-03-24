@@ -14,28 +14,29 @@ import java.util.List;
 @Document
 public class Part {
 
-@Id
+    @Id
     private Integer id;
     @Field
     private long productionStart;
     @Field
     private long productionEnd;
 
-@Field
+    @Field
     private int line;
 
 
-@Transient
-private List<Integer> machines;
-    public Part(){
-        this.id =null;
+    @Transient
+    private List<Integer> machines;
+
+    public Part() {
+        this.id = null;
 
     }
 
-    public Part(Integer id, long productionStart, long productionEnd,int line){
-        this.id=id;
-        this.productionStart=productionStart;
-        this.productionEnd=productionEnd;
-        this.line=line;
+    public Part(Integer id, long productionStart, long productionEnd, int line) {
+        this.id = id;
+        this.productionStart = productionStart;
+        this.productionEnd = productionEnd;
+        this.line = line;
     }
 }

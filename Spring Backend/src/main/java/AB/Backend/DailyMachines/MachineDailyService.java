@@ -12,19 +12,16 @@ public class MachineDailyService {
 
     private final MachineDailyRepo machineDailyRepo;
     @Autowired
-    public MachineDailyService(MachineDailyRepo machineDailyRepo){
+    public MachineDailyService(MachineDailyRepo machineDailyRepo) {
         this.machineDailyRepo = machineDailyRepo;
     }
 
-
-
-   public List<MachineDaily> getLast7(@PathVariable int id){
+    public List<MachineDaily> getLast7(@PathVariable int id) {
 
         return machineDailyRepo.findTop7ByIdOOrderByStartTime(id);
-   }
-   public List<MachineDaily> getBetween(int id, long startTime,long endTime){
-        return machineDailyRepo.findByIdAndsAndStartTimeBetween(id,startTime,endTime);
-   }
+    }
 
-
+    public List<MachineDaily> getBetween(int id, long startTime, long endTime) {
+        return machineDailyRepo.findByIdAndsAndStartTimeBetween(id, startTime, endTime);
+    }
 }
